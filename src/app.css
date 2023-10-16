@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--light-500: '#ffffff';
+		--dark-500: #2b2b2b;
+		--dark-text: #f5f4f8;
+		--header-height: 64px;
+	}
+}
+html {
+	overflow-x: hidden;
+	height: 100dvh;
+}
+
+html.dark {
+	background-color: var(--dark-500);
+	color: var(--dark-text);
+	color-scheme: dark;
+}
+
+body {
+	height: 100%;
+}
+
+@layer components {
+	.container-youko {
+		@apply container px-4 mx-auto;
+		transition: max-width 450ms;
+	}
+}
+
+.custom-scroll {
+	scrollbar-gutter: stable;
+	scrollbar-width: thin;
+	scrollbar-color: #ffffff00 transparent;
+}
+
+.custom-scroll::-webkit-scrollbar {
+	width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 1px;
+	border: transparent;
+	visibility: hidden;
+}
+
+.dark .custom-scroll::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-scroll:hover {
+	scrollbar-color: #ffffff50 transparent;
+}
+
+.custom-scroll:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
