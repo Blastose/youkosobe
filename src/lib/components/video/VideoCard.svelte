@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { ThumbnailObject } from '$lib/invidious/types';
-	import { IconCheck } from '@tabler/icons-svelte';
+	import { IconCircleCheckFilled } from '@tabler/icons-svelte';
 	import { formatTime } from './utils';
 
 	export let title: string;
@@ -64,7 +64,7 @@
 				>
 					{author}
 					{#if authorVerified}
-						<IconCheck size={16} />
+						<IconCircleCheckFilled size={16} />
 					{/if}
 				</a>
 				<span>{viewCountText} • {publishedText}</span>

@@ -13,6 +13,7 @@
 html {
 	overflow-x: hidden;
 	height: 100dvh;
+	overflow-wrap: anywhere;
 }
 
 html.dark {
@@ -29,6 +30,7 @@ body {
 	.container-youko {
 		@apply container px-4 mx-auto;
 		transition: max-width 450ms;
+		padding-bottom: 2rem;
 	}
 }
 
