@@ -40,18 +40,19 @@
 				<p class="dark:text-neutral-400">{numberFormatter.format(channel.subCount)} subscribers</p>
 			</div>
 
-			{#if channel.description}
-				<a
-					href="/channel/{channel.authorId}/about"
-					class="flex gap-2 items-end dark:text-neutral-400"
-				>
+			<a
+				href="/channel/{channel.authorId}/about"
+				class="flex gap-2 items-end dark:text-neutral-400"
+			>
+				{#if channel.description}
 					<span class="max-w-xl line-clamp-2">
 						{@html channel.descriptionHtml}
 					</span>
-
-					<span><IconChevronRight /></span>
-				</a>
-			{/if}
+				{:else}
+					<span>More about this channel</span>
+				{/if}
+				<span><IconChevronRight /></span>
+			</a>
 		</div>
 	</div>
 

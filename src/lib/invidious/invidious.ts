@@ -150,7 +150,11 @@ export class Invidious {
 
 	async getChannelCommunityPosts(id: string, params?: GetChannelCommunityPostsParams) {
 		const url = `${this.apiVersionPrefix}/channels/${id}/community`;
-		return await this.get<GetChannelCommunityPosts>(url, params);
+		try {
+			return await this.get<GetChannelCommunityPosts>(url, params);
+		} catch {
+			return { authorId: 'unknown', comments: [], continuation: '' } as GetChannelCommunityPosts;
+		}
 	}
 
 	async getChannelCommunityPostComments(
