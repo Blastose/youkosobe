@@ -1,4 +1,5 @@
 <div class="sidebar custom-scroll">
+	<a href="/feed/trending">Trending</a>
 	{#each { length: 100 } as a}
 		<p>sidebar</p>
 	{/each}

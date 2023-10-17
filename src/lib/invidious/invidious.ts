@@ -28,7 +28,8 @@ import type {
 	GetChannelStreamsParams,
 	GetChannelVideosParams,
 	GetChannelCommunityPosts,
-	GetChannelCommunityPostsParams
+	GetChannelCommunityPostsParams,
+	ISO3166
 } from './types';
 
 type QueryParams = Record<string, number | string | string[]>;
@@ -56,14 +57,16 @@ function buildQueryString(params?: QueryParams): string {
 export class Invidious {
 	instanceUrl: string;
 	apiVersionPrefix: string;
+	lang: ISO3166;
 
 	constructor(instanceUrl: string) {
 		this.instanceUrl = instanceUrl;
 		this.apiVersionPrefix = '/api/v1';
+		this.lang = 'en-US';
 	}
 
 	private async get<T>(url: string, params?: QueryParams) {
-		const fetchUrl = `${this.instanceUrl}${url}${buildQueryString(params)}`;
+		const fetchUrl = `${this.instanceUrl}${url}?hl=${this.lang}&${buildQueryString(params)}`;
 		const res = await fetch(fetchUrl);
 
 		if (res.status !== 200) {
@@ -95,8 +98,8 @@ export class Invidious {
 		return await this.get<GetCaptionsById>(url, params);
 	}
 
-	async getTrending(id: string, params: GetTrendingParams) {
-		const url = `${this.apiVersionPrefix}/trending/${id}`;
+	async getTrending(params?: GetTrendingParams) {
+		const url = `${this.apiVersionPrefix}/trending`;
 		return await this.get<GetTrending[]>(url, params);
 	}
 

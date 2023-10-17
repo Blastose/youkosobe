@@ -29,12 +29,7 @@ export type GetVideoByIdParams = {
 export type GetVideoById = {
 	title: string;
 	videoId: string;
-	videoThumbnails: {
-		quality: string;
-		url: string;
-		width: number;
-		height: number;
-	}[];
+	videoThumbnails: ThumbnailObject[];
 
 	description: string;
 	descriptionHtml: string;
@@ -113,12 +108,7 @@ export type GetVideoById = {
 	recommendedVideos: {
 		videoId: string;
 		title: string;
-		videoThumbnails: {
-			quality: string;
-			url: string;
-			width: number;
-			height: number;
-		}[];
+		videoThumbnails: ThumbnailObject[];
 		author: string;
 		lengthSeconds: number;
 		viewCountText: string;
@@ -189,19 +179,16 @@ export type GetTrendingParams = {
 export type GetTrending = {
 	title: string;
 	videoId: string;
-	videoThumbnails: {
-		quality: string;
-		url: string;
-		width: number;
-		height: number;
-	}[];
+	videoThumbnails: ThumbnailObject[];
 
 	lengthSeconds: number;
 	viewCount: number;
+	viewCountText: string;
 
 	author: string;
 	authorId: string;
 	authorUrl: string;
+	authorVerified: boolean;
 
 	published: number;
 	publishedText: string;
@@ -217,14 +204,7 @@ export type GetPopular = {
 	type: 'shortVideo';
 	title: string;
 	videoId: string;
-	videoThumbnails: [
-		{
-			quality: string;
-			url: string;
-			width: number;
-			height: number;
-		}
-	];
+	videoThumbnails: ThumbnailObject[];
 
 	lengthSeconds: number;
 	viewCount: number;
@@ -350,12 +330,7 @@ export type GetChannelSearch = (
 			author: string;
 			authorId: string;
 			authorUrl: string;
-			videoThumbnails: {
-				quality: string;
-				url: string;
-				width: number;
-				height: number;
-			}[];
+			videoThumbnails: ThumbnailObject[];
 			description: string;
 			descriptionHtml: string;
 			viewCount: number;
@@ -379,12 +354,7 @@ export type GetChannelSearch = (
 				title: string;
 				videoId: string;
 				lengthSeconds: number;
-				videoThumbnails: {
-					quality: string;
-					url: string;
-					width: number;
-					height: number;
-				}[];
+				videoThumbnails: ThumbnailObject[];
 			}[];
 	  }
 	| {
@@ -445,12 +415,7 @@ export type GetSearch =
 			author: string;
 			authorId: string;
 			authorUrl: string;
-			videoThumbnails: {
-				quality: string;
-				url: string;
-				width: number;
-				height: number;
-			}[];
+			videoThumbnails: ThumbnailObject[];
 			description: string;
 			descriptionHtml: string;
 			viewCount: number;
@@ -476,12 +441,7 @@ export type GetSearch =
 				title: string;
 				videoId: string;
 				lengthSeconds: number;
-				videoThumbnails: {
-					quality: string;
-					url: string;
-					width: number;
-					height: number;
-				}[];
+				videoThumbnails: ThumbnailObject[];
 			}[];
 	  }
 	| {
@@ -532,12 +492,7 @@ export type GetPlaylistsByPlid = {
 		authorId: string;
 		authorUrl: string;
 
-		videoThumbnails: {
-			quality: string;
-			url: string;
-			width: number;
-			height: number;
-		}[];
+		videoThumbnails: ThumbnailObject[];
 		index: number;
 		lengthSeconds: number;
 	}[];
@@ -552,12 +507,7 @@ export type GetMixesByRdid = {
 		author: string;
 		authorId: string;
 		authorUrl: string;
-		videoThumbnails: {
-			quality: string;
-			url: string;
-			width: number;
-			height: number;
-		}[];
+		videoThumbnails: ThumbnailObject[];
 		index: number;
 		lengthSeconds: number;
 	}[];
