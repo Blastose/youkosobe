@@ -7,7 +7,7 @@
 	$: authorThumbnail = channel.authorThumbnails.at(-1);
 </script>
 
-<a class="flex items-center flex-col" href={channel.authorUrl}>
+<a class="flex items-center flex-col gap-1" href={channel.authorUrl}>
 	{#if authorThumbnail}
 		<img
 			src={authorThumbnail.url}

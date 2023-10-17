@@ -32,6 +32,8 @@ body {
 		@apply container px-4 mx-auto;
 		transition: max-width 450ms;
 		padding-bottom: 2rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 }
 

@@ -5,12 +5,14 @@
 	export let attachment: PollAttachment;
 </script>
 
-<div>
+<div class="flex flex-col gap-2">
 	<p class="text-sm dark:text-neutral-400">{numberFormatter.format(attachment.totalVotes)} votes</p>
 
-	{#each attachment.choices as choice}
-		<div class="border border-white rounded-sm">
-			{choice.text}
-		</div>
-	{/each}
+	<div class="flex flex-col gap-2">
+		{#each attachment.choices as choice}
+			<div class="border p-2 dark:border-[var(--dark-text)] rounded-md">
+				{choice.text}
+			</div>
+		{/each}
+	</div>
 </div>
