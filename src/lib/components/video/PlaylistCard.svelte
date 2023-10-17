@@ -4,6 +4,7 @@
 	import Icon from '$lib/components/icon/Icon.svelte';
 
 	export let playlistObject: PlaylistObject;
+	export let type: 'playlist' | 'podcast';
 
 	$: playlistThumbnail = playlistObject.playlistThumbnail;
 	$: firstVideoOfPlaylistId = playlistObject.videos.at(0)?.videoId;
@@ -34,8 +35,13 @@
 		<span
 			class="absolute left-0 bottom-0 flex items-center justify-between w-full bg-black bg-opacity-80 py-1 px-2 text-xs font-semibold"
 		>
-			<Icon height={'24'} width={'24'} name="a" />
-			<span>{playlistObject.videoCount} videos</span>
+			{#if type === 'playlist'}
+				<Icon height={'24'} width={'24'} name="playlistPlay" />
+				<span>{playlistObject.videoCount} videos</span>
+			{:else if type === 'podcast'}
+				<Icon height={'24'} width={'24'} name="podcast" />
+				<span>{playlistObject.videoCount} episodes</span>
+			{/if}
 		</span>
 	</div>
 
@@ -47,7 +53,11 @@
 			class="line-clamp-2">{playlistObject.title}</a
 		>
 		<a href={playlistUrl} class="flex flex-col text-sm dark:text-neutral-400">
-			View full playlist
+			{#if type === 'playlist'}
+				View full playlist
+			{:else if type === 'podcast'}
+				View full podcast
+			{/if}
 		</a>
 	</div>
 </div>

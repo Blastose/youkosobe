@@ -126,6 +126,11 @@ export class Invidious {
 		return await this.get<GetChannelPlaylists>(url, params);
 	}
 
+	async getChannelPodcasts(id: string, params?: GetChannelPlaylistsParams) {
+		const url = `${this.apiVersionPrefix}/channels/${id}/podcasts`;
+		return await this.get<GetChannelPlaylists>(url, params);
+	}
+
 	async getChannelShorts(id: string, params?: GetChannelShortsParams) {
 		const url = `${this.apiVersionPrefix}/channels/${id}/shorts`;
 		return await this.get<GetChannelVideos>(url, params);
