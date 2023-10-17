@@ -12,7 +12,11 @@
 	<div class="flex flex-col gap-4">
 		<h2 class="text-lg">Description</h2>
 		<div>
-			{@html data.channel.descriptionHtml}
+			{#if data.channel.description}
+				{@html data.channel.descriptionHtml}
+			{:else}
+				No description
+			{/if}
 		</div>
 	</div>
 

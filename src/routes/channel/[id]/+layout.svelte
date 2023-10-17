@@ -8,7 +8,7 @@
 
 <svelte:head><title>{buildPageTitle(data.channel.author)}</title></svelte:head>
 
-<div class="container-youko flex flex-col gap-4">
+<div class="container-youko flex flex-col gap-4 sm:gap-8">
 	<Channel channel={data.channel} />
 
 	<slot />

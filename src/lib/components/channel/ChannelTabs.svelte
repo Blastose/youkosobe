@@ -20,7 +20,7 @@
 </script>
 
 <div class="grid">
-	<div class="flex custom-scroll overflow-x-auto gap-8">
+	<div class="flex custom-scroll overflow-x-auto gap-2 sm:gap-8">
 		{#each allChannelTabs as tab}
 			{#if channelTabs.includes(tab.hrefFragment)}
 				{@const href =
