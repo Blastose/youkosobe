@@ -29,7 +29,9 @@ import type {
 	GetChannelVideosParams,
 	GetChannelCommunityPosts,
 	GetChannelCommunityPostsParams,
-	ISO3166
+	ISO3166,
+	GetChannelCommunityPostCommentsParams,
+	GetChannelCommunityPostComments
 } from './types';
 
 type QueryParams = Record<string, number | string | string[]>;
@@ -149,6 +151,14 @@ export class Invidious {
 	async getChannelCommunityPosts(id: string, params?: GetChannelCommunityPostsParams) {
 		const url = `${this.apiVersionPrefix}/channels/${id}/community`;
 		return await this.get<GetChannelCommunityPosts>(url, params);
+	}
+
+	async getChannelCommunityPostComments(
+		postId: string,
+		params: GetChannelCommunityPostCommentsParams
+	) {
+		const url = `${this.apiVersionPrefix}/post/${postId}/comments`;
+		return await this.get<GetChannelCommunityPostComments>(url, params);
 	}
 
 	async getChannelSearch(id: string, params: GetChannelSearchParams) {

@@ -1,9 +1,12 @@
 <script lang="ts">
+	import CommunityPostCard from '$lib/components/channel/community/CommunityPostCard.svelte';
+
 	export let data;
+	console.log(data.communityPosts);
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-8">
 	{#each data.communityPosts.comments as communityPost}
-		<div>{@html communityPost.contentHtml}</div>
+		<CommunityPostCard {communityPost} />
 	{/each}
 </div>

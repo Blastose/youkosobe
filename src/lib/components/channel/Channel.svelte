@@ -3,16 +3,12 @@
 	import { IconChevronRight, IconCircleCheckFilled } from '@tabler/icons-svelte';
 	import ChannelTabs from './ChannelTabs.svelte';
 	import Hr from '$lib/components/layout/Hr.svelte';
+	import { numberFormatter } from '$lib/components/video/utils';
 
 	export let channel: GetChannelById;
 
 	$: authorBanner = channel.authorBanners[0];
 	$: authorThumbnail = channel.authorThumbnails.at(-1) ?? channel.authorThumbnails[0];
-
-	const numberFormatter = Intl.NumberFormat('en', {
-		notation: 'compact',
-		maximumSignificantDigits: 3
-	});
 </script>
 
 <div class="flex flex-col gap-4 sm:gap-6">

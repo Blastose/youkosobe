@@ -26,3 +26,14 @@ export function formatTime(seconds: number) {
 
 	return time;
 }
+
+export const numberFormatter = Intl.NumberFormat('en', {
+	notation: 'compact',
+	maximumSignificantDigits: 3
+});
+
+export function fixThumbnailImageUrl(url: string) {
+	if (!url.startsWith('//')) return url;
+
+	return url.replace(/^\/\//, 'https://');
+}
