@@ -14,6 +14,7 @@
 	export let publishedText: string;
 	export let viewCountText: string;
 	export let lengthSeconds: number;
+	export let type: 'video' | 'short' | 'stream';
 </script>
 
 <div
@@ -67,7 +68,14 @@
 						<IconCircleCheckFilled size={16} />
 					{/if}
 				</a>
-				<span>{viewCountText} • {publishedText}</span>
+				<span>
+					{viewCountText}
+					{#if type === 'video'}
+						• {publishedText}
+					{:else if type === 'stream'}
+						• Streamed {publishedText}
+					{/if}
+				</span>
 			</p>
 		</div>
 	</div>

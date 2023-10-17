@@ -20,6 +20,7 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@types/nprogress": "^0.2.0",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
@@ -40,6 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tabler/icons-svelte": "^2.39.0"
+		"@tabler/icons-svelte": "^2.39.0",
+		"nprogress": "^0.2.0"
 	}
 }

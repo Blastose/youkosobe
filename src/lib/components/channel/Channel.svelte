@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { GetChannelById } from '$lib/invidious/types';
-	import { IconCircleCheckFilled } from '@tabler/icons-svelte';
+	import { IconChevronRight, IconCircleCheckFilled } from '@tabler/icons-svelte';
 	import ChannelTabs from './ChannelTabs.svelte';
+	import Hr from '$lib/components/layout/Hr.svelte';
 
 	export let channel: GetChannelById;
 
@@ -41,15 +42,20 @@
 				<p class="dark:text-neutral-400">{numberFormatter.format(channel.subCount)} subscribers</p>
 			</div>
 			<a
-				href="/channels/{channel.authorId}/about"
-				class="dark:text-neutral-400 max-w-xl line-clamp-2">{@html channel.descriptionHtml}</a
+				href="/channel/{channel.authorId}/about"
+				class="flex gap-2 items-end dark:text-neutral-400"
 			>
+				<span class="max-w-xl line-clamp-2">
+					{@html channel.descriptionHtml}
+				</span>
+				<span><IconChevronRight /></span>
+			</a>
 		</div>
 	</div>
 
 	<div>
-		<ChannelTabs channelUrl="/channel/{channel.authorId}" />
-		<hr class="dark:border-[#696969]" />
+		<ChannelTabs channelUrl="/channel/{channel.authorId}" channelTabs={channel.tabs} />
+		<Hr />
 	</div>
 </div>
 

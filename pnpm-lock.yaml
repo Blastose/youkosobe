@@ -8,6 +8,9 @@ dependencies:
   '@tabler/icons-svelte':
     specifier: ^2.39.0
     version: 2.39.0(svelte@4.2.1)
+  nprogress:
+    specifier: ^0.2.0
+    version: 0.2.0
 
 devDependencies:
   '@melt-ui/pp':
@@ -25,6 +28,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.25.2(svelte@4.2.1)(vite@4.4.11)
+  '@types/nprogress':
+    specifier: ^0.2.0
+    version: 0.2.1
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: 6.7.5(@typescript-eslint/parser@6.7.5)(eslint@8.51.0)(typescript@5.2.2)
@@ -577,6 +583,10 @@ packages:
     resolution: {integrity: sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==}
     dependencies:
       undici-types: 5.25.3
+    dev: true
+
+  /@types/nprogress@0.2.1:
+    resolution: {integrity: sha512-TYuyVnp+nOnimgdOydDIDYIxv2kSeuJZw4tF0p/KG7hpzcMF1WkHaREwM8O4blqfT1F7rq0nht6Ko2KVUfWzBA==}
     dev: true
 
   /@types/pug@2.0.7:
@@ -1729,6 +1739,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}

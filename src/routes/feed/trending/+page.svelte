@@ -24,6 +24,7 @@
 				videoId={trendingVideo.videoId}
 				videoThumbnail={thumbnail}
 				viewCountText={trendingVideo.viewCountText}
+				type="video"
 			/>
 		{/each}
 	</div>

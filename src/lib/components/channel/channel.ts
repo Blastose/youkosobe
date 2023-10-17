@@ -2,7 +2,7 @@ export type ChannelTab = {
 	display: string;
 	hrefFragment: string;
 };
-export const channelTabs: ChannelTab[] = [
+export const allChannelTabs: ChannelTab[] = [
 	{
 		display: 'home',
 		hrefFragment: 'home'
@@ -18,6 +18,10 @@ export const channelTabs: ChannelTab[] = [
 	{
 		display: 'live',
 		hrefFragment: 'streams'
+	},
+	{
+		display: 'podcasts',
+		hrefFragment: 'podcasts'
 	},
 	{
 		display: 'playlists',

@@ -3,7 +3,7 @@
 	import VideoCard from '$lib/components/video/VideoCard.svelte';
 
 	export let data;
-	console.log(data.channel);
+	console.log(data.streams.videos);
 </script>
 
 <svelte:head><title>{buildPageTitle(data.channel.author)}</title></svelte:head>
@@ -22,6 +22,7 @@
 			videoId={video.videoId}
 			videoThumbnail={thumbnail}
 			viewCountText={video.viewCountText}
+			type="stream"
 		/>
 	{/each}
 </div>

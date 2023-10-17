@@ -23,6 +23,7 @@
 			videoId={latestVideo.videoId}
 			videoThumbnail={thumbnail}
 			viewCountText={latestVideo.viewCountText}
+			type="video"
 		/>
 	{/each}
 </div>
