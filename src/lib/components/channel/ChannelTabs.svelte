@@ -2,6 +2,7 @@
 	import ChannelTabButton from './ChannelTabButton.svelte';
 	import { page } from '$app/stores';
 	import { allChannelTabs } from './channel';
+	import { IconSearch } from '@tabler/icons-svelte';
 
 	export let channelUrl: string;
 	export let channelTabs: string[];
@@ -20,7 +21,7 @@
 </script>
 
 <div class="grid">
-	<div class="flex custom-scroll overflow-x-auto gap-2 sm:gap-8">
+	<div class="flex relative custom-scroll overflow-x-auto gap-2 sm:gap-8 h-12 items-center">
 		{#each allChannelTabs as tab}
 			{#if channelTabs.includes(tab.hrefFragment)}
 				{@const href =
@@ -32,5 +33,24 @@
 				/>
 			{/if}
 		{/each}
+		<div class="relative bottom-1">
+			<form method="get" action="{channelUrl}/search">
+				<label class="flex gap-2 items-center">
+					<IconSearch class="text-[#bbb8c3]" />
+					<input
+						class="search-input bg-transparent px-4 py-1 border-b border-neutral-500 focus:outline-none focus:border-[var(--dark-text)]"
+						placeholder="Search"
+						name="query"
+						type="text"
+					/>
+				</label>
+			</form>
+		</div>
 	</div>
 </div>
+
+<style>
+	.search-input {
+		transition: border-bottom-color 300ms;
+	}
+</style>
