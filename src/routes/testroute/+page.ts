@@ -10,15 +10,7 @@ export const load: PageLoad = async ({ fetch }) => {
 	console.log(b);
 
 	const invidious = new Invidious('https://invidious.fdn.fr');
-	// const pop = await invidious.getPopular();
-	// console.log(pop);
-	// pop[0].type;
-
 	const vid = await invidious.getVideoById('Gw15GATnuXo');
-	console.log(vid);
-
-	// const c = await invidious.getCommentsById('Gw15GATnuXo');
-	// console.log(c);
 
 	return { vid };
 };
