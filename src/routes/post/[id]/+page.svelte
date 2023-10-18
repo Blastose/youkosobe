@@ -5,6 +5,7 @@
 	import type { GetChannelCommunityPostComments } from '$lib/invidious/types.js';
 	import { onMount } from 'svelte';
 	import CommentWrapper from '$lib/components/comment/CommentWrapper.svelte';
+	import Loading from '$lib/components/layout/Loading.svelte';
 
 	export let data;
 
@@ -44,6 +45,6 @@
 			</div>
 		</div>
 	{:else}
-		<p>Loading comments</p>
+		<Loading />
 	{/if}
 </div>

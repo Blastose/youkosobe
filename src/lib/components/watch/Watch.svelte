@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GetCommentsById, GetVideoById } from '$lib/invidious/types';
+	import Loading from '../layout/Loading.svelte';
 	import WatchAuthorActions from './WatchAuthorActions.svelte';
 	import WatchComments from './WatchComments.svelte';
 	import WatchDescription from './WatchDescription.svelte';
@@ -44,7 +45,7 @@
 			{#if commentObject}
 				<WatchComments {commentObject} channelName={video.author} />
 			{:else}
-				<p>Loading comments...</p>
+				<Loading />
 			{/if}
 		</div>
 	</div>
