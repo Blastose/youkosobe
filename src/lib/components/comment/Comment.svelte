@@ -3,6 +3,7 @@
 	import AuthorThumbnail from '$lib/components/channel/community/AuthorThumbnail.svelte';
 	import { numberFormatter } from '../video/utils';
 	import { IconPin, IconThumbUp } from '@tabler/icons-svelte';
+	import ReadMoreWrapper from './ReadMoreWrapper.svelte';
 
 	export let comment: Comment;
 	export let channelName: string;
@@ -39,9 +40,11 @@
 				</span>
 			</div>
 
-			<div class="youtube-html">
-				{@html comment.contentHtml}
-			</div>
+			<ReadMoreWrapper>
+				<div class="youtube-html">
+					{@html comment.contentHtml}
+				</div>
+			</ReadMoreWrapper>
 		</div>
 
 		<div class="dark:text-neutral-400 flex gap-4 items-center">
