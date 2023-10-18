@@ -39,10 +39,13 @@
 			{#if !descriptionExpanded}
 				<span
 					>{numberFormatter.format(video.viewCount)}
-					{video.type === 'livestream' ? 'watching now' : 'views'}</span
-				>
+					{video.type === 'livestream' ? 'watching now' : 'views'}
+				</span>
 			{:else}
-				<span>{video.viewCount.toLocaleString()} views</span>
+				<span
+					>{video.viewCount.toLocaleString()}
+					{video.type === 'livestream' ? 'watching now' : 'views'}
+				</span>
 			{/if}
 
 			{#if !descriptionExpanded}
