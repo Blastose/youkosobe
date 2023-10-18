@@ -31,7 +31,8 @@ import type {
 	GetChannelCommunityPostsParams,
 	ISO3166,
 	GetChannelCommunityPostCommentsParams,
-	GetChannelCommunityPostComments
+	GetChannelCommunityPostComments,
+	GetChannelCommunityPost
 } from './types';
 
 type QueryParams = Record<string, number | string | string[]>;
@@ -155,6 +156,11 @@ export class Invidious {
 		} catch {
 			return { authorId: 'unknown', comments: [], continuation: '' } as GetChannelCommunityPosts;
 		}
+	}
+
+	async getChannelCommunityPost(postId: string) {
+		const url = `${this.apiVersionPrefix}/post/${postId}`;
+		return await this.get<GetChannelCommunityPost>(url);
 	}
 
 	async getChannelCommunityPostComments(

@@ -130,6 +130,7 @@ export type Comment = {
 	}[];
 	authorId: string;
 	authorUrl: string;
+	verified: boolean;
 
 	isEdited: boolean;
 	isPinned: boolean;
@@ -319,10 +320,16 @@ export type GetChannelCommunityPosts = {
 	comments: CommunityPost[];
 	continuation: string;
 };
+export type GetChannelCommunityPost = {
+	authorId: string;
+	singlePost: boolean;
+	comments: CommunityPost[];
+};
 export type GetChannelCommunityPostComments = {
 	commentCount: number;
 	postId: string;
-	comments: (Comment & { verified: boolean })[];
+	continuation?: string;
+	comments: Comment[];
 };
 export type GetChannelCommunityPostCommentsParams = {
 	ucid: string;
