@@ -121,38 +121,40 @@ export type GetCommentsByIdParams = {
 	continuation: string;
 };
 
+export type Comment = {
+	author: string;
+	authorThumbnails: {
+		url: string;
+		width: number;
+		height: number;
+	}[];
+	authorId: string;
+	authorUrl: string;
+	verified: boolean;
+
+	isEdited: boolean;
+	isPinned: boolean;
+
+	content: string;
+	contentHtml: string;
+	published: number;
+	publishedText: string;
+	likeCount: number;
+	commentId: string;
+	authorIsChannelOwner: boolean;
+	creatorHeart?: {
+		creatorThumbnail: string;
+		creatorName: string;
+	};
+	replies?: {
+		replyCount: number;
+		continuation: string;
+	};
+};
 export type GetCommentsById = {
 	commentCount?: number;
 	videoId: string;
-	comments: {
-		author: string;
-		authorThumbnails: {
-			url: string;
-			width: number;
-			height: number;
-		}[];
-		authorId: string;
-		authorUrl: string;
-
-		isEdited: boolean;
-		isPinned: boolean;
-
-		content: string;
-		contentHtml: string;
-		published: number;
-		publishedText: string;
-		likeCount: number;
-		commentId: string;
-		authorIsChannelOwner: boolean;
-		creatorHeart?: {
-			creatorThumbnail: string;
-			creatorName: string;
-		};
-		replies?: {
-			replyCount: number;
-			continuation: string;
-		};
-	}[];
+	comments: Comment[];
 	continuation?: string;
 };
 
@@ -272,23 +274,23 @@ export type GetChannelVideos = {
 	continuation: string;
 };
 
-type VideoAttachment = VideoObject;
-type PlaylistAttachment = PlaylistObject;
-type ImageAttachment = {
+export type VideoAttachment = VideoObject;
+export type PlaylistAttachment = PlaylistObject;
+export type ImageAttachment = {
 	type: 'image';
 	imageThumbnails: ImageObject[];
 };
-type MultiImageAttachment = {
+export type MultiImageAttachment = {
 	type: 'multiImage';
 	images: ImageObject[][];
 };
-type PollAttachment = {
+export type PollAttachment = {
 	type: 'poll';
 	totalVotes: number;
 	choices: { text: string; image?: ImageObject }[];
 };
 
-type Attachment =
+export type Attachment =
 	| ImageAttachment
 	| MultiImageAttachment
 	| VideoAttachment
@@ -297,24 +299,42 @@ type Attachment =
 export type GetChannelCommunityPostsParams = {
 	continuation: string;
 };
+export type CommunityPost = {
+	attachment?: Attachment;
+	author: string;
+	authorIsChannelOwner: boolean;
+	authorId: string;
+	authorThumbnails: ImageObject[];
+	authorUrl: string;
+	commentId: string;
+	content: string;
+	contentHtml: string;
+	isEdited: boolean;
+	likeCount: number;
+	published: number;
+	publishedText: string;
+	replyCount: number;
+};
 export type GetChannelCommunityPosts = {
 	authorId: string;
-	comments: {
-		attachment: Attachment;
-		author: string;
-		authorIsChannelOwner: boolean;
-		authorId: string;
-		authorThumbnails: ImageObject[];
-		authorUrl: string;
-		commentId: string;
-		content: string;
-		contentHtml: string;
-		isEdited: boolean;
-		likeCount: number;
-		published: number;
-		publishedText: string;
-		replyCount: number;
-	}[];
+	comments: CommunityPost[];
+	continuation: string;
+};
+export type GetChannelCommunityPost = {
+	authorId: string;
+	singlePost: boolean;
+	comments: CommunityPost[];
+};
+export type GetChannelCommunityPostComments = {
+	commentCount: number;
+	postId: string;
+	continuation?: string;
+	comments: Comment[];
+};
+export type GetChannelCommunityPostCommentsParams = {
+	ucid: string;
+	action?: 'action_get_comment_replies';
+	continuation?: string;
 };
 
 export type GetChannelSearchParams = {
@@ -322,58 +342,62 @@ export type GetChannelSearchParams = {
 	page: number;
 };
 
-export type GetChannelSearch = (
-	| {
-			type: 'video';
-			title: string;
-			videoId: string;
-			author: string;
-			authorId: string;
-			authorUrl: string;
-			videoThumbnails: ThumbnailObject[];
-			description: string;
-			descriptionHtml: string;
-			viewCount: number;
-			published: number;
-			publishedText: string;
-			lengthSeconds: number;
-			liveNow: boolean;
-			paid: boolean;
-			premium: boolean;
-	  }
-	| {
-			type: 'playlist';
-			title: string;
-			playlistId: string;
-			author: string;
-			authorId: string;
-			authorUrl: string;
+export type ChannelSearchVideoObject = {
+	type: 'video';
+	title: string;
+	videoId: string;
+	author: string;
+	authorId: string;
+	authorUrl: string;
+	authorVerified: boolean;
+	videoThumbnails: ThumbnailObject[];
+	description: string;
+	descriptionHtml: string;
+	isUpcoming: boolean;
+	viewCount: number;
+	viewCountText: string;
+	published: number;
+	publishedText: string;
+	lengthSeconds: number;
+	liveNow: boolean;
+	paid: boolean;
+	premium: boolean;
+};
+export type ChannelSearchPlaylistObject = {
+	type: 'playlist';
+	title: string;
+	playlistId: string;
+	playlistThumbnail: string;
+	author: string;
+	authorId: string;
+	authorUrl: string;
+	authorVerified: boolean;
 
-			videoCount: number;
-			videos: {
-				title: string;
-				videoId: string;
-				lengthSeconds: number;
-				videoThumbnails: ThumbnailObject[];
-			}[];
-	  }
-	| {
-			type: 'channel';
-			author: string;
-			authorId: string;
-			authorUrl: string;
-
-			authorThumbnails: {
-				url: string;
-				width: number;
-				height: number;
-			}[];
-			subCount: number;
-			videoCount: number;
-			description: string;
-			descriptionHtml: string;
-	  }
-)[];
+	videoCount: number;
+	videos: {
+		title: string;
+		videoId: string;
+		lengthSeconds: number;
+		videoThumbnails: ThumbnailObject[];
+	}[];
+};
+export type ChannelSearchChannelObject = {
+	type: 'channel';
+	author: string;
+	authorId: string;
+	authorUrl: string;
+	authorVerified: boolean;
+	autoGenerated: boolean;
+	authorThumbnails: ThumbnailObject[]; // maybe doesn't have quality?
+	subCount: number;
+	videoCount: number;
+	description: string;
+	descriptionHtml: string;
+};
+export type GetChannelSearch =
+	| ChannelSearchVideoObject
+	| ChannelSearchPlaylistObject
+	| ChannelSearchChannelObject;
 
 export type GetSearchSuggestionsParams = {
 	q: string;

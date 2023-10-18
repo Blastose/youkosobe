@@ -6,7 +6,7 @@
 <div class="container-youko">
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video src={data.vid.formatStreams[1].url} controls muted />
-	<p>
+	<p class="youtube-html">
 		{@html data.vid.descriptionHtml}
 	</p>
 </div>

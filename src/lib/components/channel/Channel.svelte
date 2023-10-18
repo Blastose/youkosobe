@@ -3,23 +3,21 @@
 	import { IconChevronRight, IconCircleCheckFilled } from '@tabler/icons-svelte';
 	import ChannelTabs from './ChannelTabs.svelte';
 	import Hr from '$lib/components/layout/Hr.svelte';
+	import { numberFormatter } from '$lib/components/video/utils';
 
 	export let channel: GetChannelById;
 
-	$: authorBanner = channel.authorBanners[0];
+	$: authorBanner = channel.authorBanners.at(0);
 	$: authorThumbnail = channel.authorThumbnails.at(-1) ?? channel.authorThumbnails[0];
-
-	const numberFormatter = Intl.NumberFormat('en', {
-		notation: 'compact',
-		maximumSignificantDigits: 3
-	});
 </script>
 
 <div class="flex flex-col gap-4 sm:gap-6">
-	<div
-		class="banner h-[128px] sm:h-[256px] bg-no-repeat bg-cover"
-		style:background-image={`url("${authorBanner.url}")`}
-	/>
+	{#if authorBanner}
+		<div
+			class="banner h-[128px] sm:h-[256px] bg-no-repeat bg-cover"
+			style:background-image={`url("${authorBanner.url}")`}
+		/>
+	{/if}
 
 	<div class="flex gap-4 sm:gap-6">
 		<img
@@ -41,13 +39,18 @@
 				</p>
 				<p class="dark:text-neutral-400">{numberFormatter.format(channel.subCount)} subscribers</p>
 			</div>
+
 			<a
 				href="/channel/{channel.authorId}/about"
 				class="flex gap-2 items-end dark:text-neutral-400"
 			>
-				<span class="max-w-xl line-clamp-2">
-					{@html channel.descriptionHtml}
-				</span>
+				{#if channel.description}
+					<span class="youtube-html max-w-xl line-clamp-2">
+						{@html channel.descriptionHtml}
+					</span>
+				{:else}
+					<span>More about this channel</span>
+				{/if}
 				<span><IconChevronRight /></span>
 			</a>
 		</div>
