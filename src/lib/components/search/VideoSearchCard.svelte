@@ -18,7 +18,7 @@
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<a href="/watch?={videoObject.videoId}" class="text-lg font-semibold">
+				<a href="/watch?v={videoObject.videoId}" class="text-lg font-semibold">
 					{videoObject.title}
 				</a>
 				<p class="text-sm dark:text-neutral-400">

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GetCommentsById, GetVideoById } from '$lib/invidious/types';
 	import Loading from '../layout/Loading.svelte';
+	import RecommendedVideoCard from '../video/RecommendedVideoCard.svelte';
 	import WatchAuthorActions from './WatchAuthorActions.svelte';
 	import WatchComments from './WatchComments.svelte';
 	import WatchDescription from './WatchDescription.svelte';
@@ -90,20 +91,21 @@
 
 		<WatchDescription {video} {handleDescriptionCollapse} />
 
-		<div>
-			{#if commentObject}
-				<WatchComments {commentObject} channelName={video.author} />
-			{:else}
-				<Loading />
-			{/if}
-		</div>
+		{#if video.type !== 'livestream'}
+			<div>
+				{#if commentObject}
+					<WatchComments {commentObject} channelName={video.author} />
+				{:else}
+					<Loading />
+				{/if}
+			</div>
+		{/if}
 	</div>
 
-	<div>
-		<!-- TODO playlist on top -->
+	<div class="flex flex-col gap-2">
 		{#each video.recommendedVideos as recommendedVideo}
 			<div>
-				{recommendedVideo.title}
+				<RecommendedVideoCard {recommendedVideo} />
 			</div>
 		{/each}
 	</div>
