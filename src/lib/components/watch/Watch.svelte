@@ -7,6 +7,7 @@
 
 	export let video: GetVideoById;
 	export let commentObject: GetCommentsById | undefined;
+	export let initialTimestamp: number;
 
 	let videoTitleElement: HTMLParagraphElement;
 	let videoElement: HTMLVideoElement;
@@ -51,6 +52,10 @@
 		videoElement.currentTime = timestamp;
 		videoElement.play();
 	}
+
+	function initVideo(el: HTMLVideoElement) {
+		el.currentTime = initialTimestamp;
+	}
 </script>
 
 <div
@@ -60,7 +65,14 @@
 	<div class="flex flex-col gap-4">
 		{#if stream}
 			<div class="rounded-lg overflow-hidden">
-				<video bind:this={videoElement} class="w-full" src={stream.url} controls muted />
+				<video
+					use:initVideo
+					bind:this={videoElement}
+					class="w-full"
+					src={stream.url}
+					controls
+					muted
+				/>
 			</div>
 		{/if}
 

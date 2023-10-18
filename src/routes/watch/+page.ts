@@ -4,6 +4,7 @@ import { redirect } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ url }) => {
 	const id = url.searchParams.get('v');
+	const initialTimestamp = Number(url.searchParams.get('t'));
 
 	if (!id) {
 		throw redirect(302, '/');
@@ -12,5 +13,5 @@ export const load: PageLoad = async ({ url }) => {
 	const invidious = new Invidious('https://invidious.fdn.fr');
 	const video = await invidious.getVideoById(id);
 
-	return { video, id };
+	return { video, id, initialTimestamp };
 };
