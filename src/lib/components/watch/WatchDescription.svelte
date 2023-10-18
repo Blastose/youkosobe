@@ -55,7 +55,11 @@
 					{:else if video.type === 'scheduled'}
 						Streamed
 					{/if}
-					{video.publishedText}
+					{#if video.type !== 'livestream'}
+						{video.publishedText}
+					{:else}
+						{new Date(video.published * 1000).toLocaleDateString()}
+					{/if}
 				</span>
 			{:else}
 				<span>

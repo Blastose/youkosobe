@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GetVideoById } from '$lib/invidious/types';
+	import { IconBroadcast } from '@tabler/icons-svelte';
 	import ClickableDivWrapper from '../video/ClickableDivWrapper.svelte';
 	import VideoThumbnail from '../video/VideoThumbnail.svelte';
 
@@ -7,10 +8,11 @@
 	$: thumbnail =
 		recommendedVideo.videoThumbnails.find((v) => v.quality === 'medium') ??
 		recommendedVideo.videoThumbnails.at(0);
+	$: isLivestream = recommendedVideo.viewCount === 0 && recommendedVideo.lengthSeconds === 0;
 </script>
 
 <ClickableDivWrapper href="/watch?v={recommendedVideo.videoId}" fit={true}>
-	<div class="max-w-5xl grid grid-cols-[168px_1fr] gap-2">
+	<div class="max-w-5xl grid grid-cols-[196px_1fr] gap-2">
 		{#if thumbnail}
 			<VideoThumbnail {thumbnail} lengthSeconds={recommendedVideo.lengthSeconds} />
 		{/if}
@@ -21,8 +23,19 @@
 					{recommendedVideo.title}
 				</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
-					<span>{recommendedVideo.author}</span>
-					<span>{recommendedVideo.viewCountText} views</span>
+					<span class="line-clamp-1">{recommendedVideo.author}</span>
+					<!-- Livestream -->
+					{#if isLivestream}
+						<span>{recommendedVideo.viewCountText} watching</span>
+						<span
+							class="flex gap-1 fond-semibold items-center px-1 dark:bg-red-700 text-white rounded-md w-fit"
+						>
+							<IconBroadcast size={16} />
+							Live
+						</span>
+					{:else}
+						<span>{recommendedVideo.viewCountText} views</span>
+					{/if}
 				</p>
 			</div>
 		</div>
