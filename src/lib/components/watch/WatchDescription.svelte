@@ -32,20 +32,37 @@
 	class={descriptionExpanded ? 'cursor-auto' : 'cursor-pointer'}
 >
 	<div
-		class="flex flex-col gap-2 rounded-xl p-4 dark:bg-neutral-800
+		class="flex flex-col gap-2 rounded-xl p-3 dark:bg-neutral-800
   {descriptionExpanded ? '' : 'duration-300 dark:hover:bg-neutral-700 '}"
 	>
 		<p class="flex flex-wrap gap-x-2 font-semibold">
 			{#if !descriptionExpanded}
-				<span>{numberFormatter.format(video.viewCount)} views</span>
+				<span
+					>{numberFormatter.format(video.viewCount)}
+					{video.type === 'livestream' ? 'watching now' : 'views'}</span
+				>
 			{:else}
 				<span>{video.viewCount.toLocaleString()} views</span>
 			{/if}
 
 			{#if !descriptionExpanded}
-				<span>{video.publishedText}</span>
+				<span>
+					{#if video.type === 'livestream'}
+						Started streaming
+					{:else if video.type === 'scheduled'}
+						Streamed
+					{/if}
+					{video.publishedText}
+				</span>
 			{:else}
-				<span>{new Date(video.published * 1000).toLocaleDateString()}</span>
+				<span>
+					{#if video.type === 'livestream'}
+						Started streaming
+					{:else if video.type === 'scheduled'}
+						Streamed
+					{/if}
+					{new Date(video.published * 1000).toLocaleDateString()}
+				</span>
 			{/if}
 
 			{#each video.keywords.slice(0, 3) as keyword}

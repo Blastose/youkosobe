@@ -11,6 +11,7 @@
 	$: {
 		data.id;
 		(async () => {
+			if (data.video.type === 'livestream') return;
 			commentObject = undefined;
 			const invidious = new Invidious('https://invidious.fdn.fr');
 			const res = await invidious.getCommentsById(data.id);

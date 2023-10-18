@@ -27,7 +27,7 @@ export type GetVideoByIdParams = {
 };
 
 export type GetVideoById = {
-	type: 'video';
+	type: 'video' | 'livestream' | 'scheduled';
 	title: string;
 	videoId: string;
 	videoThumbnails: ThumbnailObject[];
