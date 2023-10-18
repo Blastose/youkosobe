@@ -32,7 +32,7 @@
 	class={descriptionExpanded ? 'cursor-auto' : 'cursor-pointer'}
 >
 	<div
-		class="flex flex-col gap-2 rounded-xl p-3 dark:bg-neutral-800
+		class="relative flex flex-col gap-2 rounded-xl p-3 dark:bg-neutral-800
   {descriptionExpanded ? '' : 'duration-300 dark:hover:bg-neutral-700 '}"
 	>
 		<p class="flex flex-wrap gap-x-2 font-semibold">
@@ -77,7 +77,7 @@
 			{/each}
 		</p>
 
-		<div class:line-clamp-3={!descriptionExpanded} class="youtube-html">
+		<div class="{descriptionExpanded ? '' : 'overflow-hidden max-h-[96px]'} youtube-html">
 			{@html convertNewlinesToBr(video.descriptionHtml)}
 		</div>
 
@@ -91,6 +91,9 @@
 					handleDescriptionCollapse();
 				}}>Show less</button
 			>
+		{:else}
+			<div class="h-4" />
+			<button class="absolute bottom-3 font-semibold">...more</button>
 		{/if}
 	</div>
 </div>
