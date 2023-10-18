@@ -1,4 +1,6 @@
 <script lang="ts">
+	import PlaylistSearchCard from '$lib/components/search/PlaylistSearchCard.svelte';
+	import VideoSearchCard from '$lib/components/search/VideoSearchCard.svelte';
 	import type { Attachment } from '$lib/invidious/types';
 	import AttachmentImage from './AttachmentImage.svelte';
 	import AttachmentMultiImage from './AttachmentMultiImage.svelte';
@@ -12,9 +14,9 @@
 {:else if attachment.type === 'multiImage'}
 	<AttachmentMultiImage {attachment} />
 {:else if attachment.type === 'video'}
-	<p>TODO (video post)</p>
+	<VideoSearchCard videoObject={attachment} />
 {:else if attachment.type === 'playlist'}
-	<p>TODO (playlist post)</p>
+	<PlaylistSearchCard playlistObject={attachment} />
 {:else if attachment.type === 'poll'}
 	<AttachmentPoll {attachment} />
 {/if}
