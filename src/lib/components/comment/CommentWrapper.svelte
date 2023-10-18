@@ -7,6 +7,7 @@
 
 	export let id: string;
 	export let comment: Comment;
+	export let channelName: string;
 	export let type: 'community' | 'video';
 
 	let continuation = comment.replies?.continuation;
@@ -51,7 +52,7 @@
 	}
 </script>
 
-<CommentW {comment}>
+<CommentW {comment} {channelName}>
 	<div class="flex flex-col gap-4">
 		{#if comment.replies}
 			<button
@@ -74,10 +75,10 @@
 			</button>
 		{/if}
 
-		{#if showReplies}
+		{#if showReplies && (repliesState !== 'notGet' || gettingReplies)}
 			<div class="flex flex-col gap-4">
 				{#each replies as reply}
-					<CommentW comment={reply} />
+					<CommentW comment={reply} {channelName} />
 				{/each}
 
 				{#if gettingReplies}

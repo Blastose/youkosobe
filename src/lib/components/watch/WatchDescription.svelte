@@ -29,7 +29,7 @@
 	}}
 	role="link"
 	tabindex="0"
-	class="{descriptionExpanded ? 'cursor-auto' : 'cursor-pointer'} w-fit h-fit"
+	class={descriptionExpanded ? 'cursor-auto' : 'cursor-pointer'}
 >
 	<div
 		class="flex flex-col gap-2 rounded-xl p-4 dark:bg-neutral-800
@@ -42,7 +42,11 @@
 				<span>{video.viewCount.toLocaleString()} views</span>
 			{/if}
 
-			<span>{video.publishedText}</span>
+			{#if !descriptionExpanded}
+				<span>{video.publishedText}</span>
+			{:else}
+				<span>{new Date(video.published * 1000).toLocaleDateString()}</span>
+			{/if}
 
 			{#each video.keywords.slice(0, 3) as keyword}
 				<a class="text-[var(--link-color)]" href="/hashtag/{keyword}">#{keyword}</a>

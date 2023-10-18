@@ -8,18 +8,21 @@
 	export let commentObject: GetCommentsById | undefined;
 
 	let videoTitleElement: HTMLParagraphElement;
-	$: streamUrl = video.formatStreams.at(1)?.url;
+	$: stream = video.formatStreams.at(1);
 
 	function handleDescriptionCollapse() {
-		videoTitleElement.scrollIntoView({ behavior: 'smooth' });
+		const rect = videoTitleElement.getBoundingClientRect();
+		if (rect.top < 64) {
+			videoTitleElement.scrollIntoView({ behavior: 'smooth' });
+		}
 	}
 </script>
 
 <div class="grid grid-cols-1 lg:grid-cols-[1fr_256px] xl:grid-cols-[1fr_400px] gap-2 sm:gap-8">
 	<div class="flex flex-col gap-4">
-		{#if streamUrl}
+		{#if stream}
 			<div class="rounded-lg overflow-hidden">
-				<video class="w-full" src={streamUrl} controls muted />
+				<video class="w-full" src={stream.url} controls muted />
 			</div>
 		{/if}
 
@@ -39,7 +42,7 @@
 
 		<div>
 			{#if commentObject}
-				<WatchComments {commentObject} />
+				<WatchComments {commentObject} channelName={video.author} />
 			{:else}
 				<p>Loading comments...</p>
 			{/if}

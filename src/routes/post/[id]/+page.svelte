@@ -34,7 +34,12 @@
 			<p>{comments.commentCount} Comments</p>
 			<div class="flex flex-col gap-6">
 				{#each comments.comments as comment}
-					<CommentWrapper {comment} id={data.postId} type="community" />
+					<CommentWrapper
+						channelName={post?.author ?? ''}
+						{comment}
+						id={data.postId}
+						type="community"
+					/>
 				{/each}
 			</div>
 		</div>

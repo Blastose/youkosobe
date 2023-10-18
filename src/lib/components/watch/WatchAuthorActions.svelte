@@ -29,7 +29,9 @@
 					<IconCircleCheckFilled size={16} />
 				{/if}
 			</a>
-			<span class="text-sm dark:text-neutral-400">{video.subCountText} subscribers</span>
+			{#if video.subCountText !== '-'}
+				<span class="text-sm dark:text-neutral-400">{video.subCountText} subscribers</span>
+			{/if}
 		</div>
 	</div>
 
@@ -55,7 +57,7 @@
 
 	.actions {
 		grid-area: actions;
-		justify-content: start;
+		justify-content: flex-start;
 		flex-wrap: wrap;
 		display: flex;
 		gap: 0.5rem;

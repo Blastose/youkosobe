@@ -11,14 +11,16 @@
 </script>
 
 <div class="grid">
-	<div class="rounded-lg max-w-4xl flex p-4 gap-2 sm:gap-4 border dark:border-[#696969]">
+	<div
+		class="rounded-lg max-w-4xl grid grid-cols-[min-content_1fr] p-4 gap-2 sm:gap-4 border dark:border-[#696969]"
+	>
 		<div>
 			{#if authorThumbnail}
 				<AuthorThumbnail thumbnailObject={authorThumbnail} />
 			{/if}
 		</div>
 
-		<div class="flex flex-col gap-2">
+		<div class="max-w-2xl flex flex-col gap-4">
 			<div class="flex flex-wrap items-center gap-2">
 				<a href="/channel/{communityPost.authorId}" class="font-semibold">{communityPost.author}</a>
 				<p class="text-sm">{communityPost.publishedText}</p>
@@ -31,12 +33,12 @@
 
 			<div class="flex gap-4 text-sm dark:text-neutral-300">
 				<p class="flex gap-1 items-center">
-					<IconThumbUp size={16} />
+					<IconThumbUp />
 					{numberFormatter.format(communityPost.likeCount)}
 				</p>
 				{#if !singlePost}
 					<a href="/post/{communityPost.commentId}" class="flex gap-1 items-center">
-						<IconMessage2 size={16} />
+						<IconMessage2 />
 						{numberFormatter.format(communityPost.replyCount)}
 					</a>
 				{/if}
