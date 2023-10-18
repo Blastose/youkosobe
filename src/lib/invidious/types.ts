@@ -136,6 +136,8 @@ export type Comment = {
 
 	isEdited: boolean;
 	isPinned: boolean;
+	isSponsor?: boolean;
+	sponsorIconUrl?: string;
 
 	content: string;
 	contentHtml: string;

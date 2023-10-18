@@ -23,11 +23,14 @@
 					<IconPin size={16} /> Pinned by {channelName}
 				</p>
 			{/if}
-			<div class="text-sm flex gap-2 flex-wrap">
+			<div class="text-sm items-center flex gap-2 flex-wrap">
 				<a
 					class={comment.authorIsChannelOwner ? 'rounded-lg px-1 dark:bg-neutral-600' : ''}
 					href={comment.authorUrl}>{comment.author}</a
 				>
+				{#if comment.isSponsor && comment.sponsorIconUrl}
+					<img class="w-[14px] h-[14px]" src={comment.sponsorIconUrl} alt="" />
+				{/if}
 				<span class="dark:text-neutral-400">
 					{comment.publishedText}
 					{#if comment.isEdited}
