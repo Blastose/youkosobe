@@ -7,7 +7,7 @@
 	import WatchDescription from './WatchDescription.svelte';
 
 	export let video: GetVideoById;
-	export let commentObject: GetCommentsById | undefined;
+	export let commentObject: GetCommentsById | 'commentsDisabled' | undefined;
 	export let initialTimestamp: number;
 
 	let videoTitleElement: HTMLParagraphElement;
@@ -93,8 +93,10 @@
 
 		{#if video.type !== 'livestream'}
 			<div>
-				{#if commentObject}
-					<WatchComments {commentObject} channelName={video.author} />
+				{#if commentObject && typeof commentObject !== 'string'}
+					<WatchComments {commentObject} channelName={video.author} videoId={video.videoId} />
+				{:else if commentObject === 'commentsDisabled'}
+					<p class="text-center">Comments are turned off</p>
 				{:else}
 					<Loading />
 				{/if}
