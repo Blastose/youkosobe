@@ -112,6 +112,7 @@ export type GetVideoById = {
 		videoThumbnails: ThumbnailObject[];
 		author: string;
 		lengthSeconds: number;
+		viewCount: number;
 		viewCountText: string;
 	}[];
 };
