@@ -102,7 +102,7 @@
 		{/if}
 	</div>
 
-	<div class="flex flex-col gap-2">
+	<div class="recommended-videos-container flex flex-col gap-2">
 		{#each video.recommendedVideos as recommendedVideo}
 			<div>
 				<RecommendedVideoCard {recommendedVideo} />
@@ -110,3 +110,9 @@
 		{/each}
 	</div>
 </div>
+
+<style>
+	.recommended-videos-container {
+		container: recommended-videos-container / inline-size;
+	}
+</style>

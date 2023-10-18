@@ -12,7 +12,7 @@
 </script>
 
 <ClickableDivWrapper href="/watch?v={recommendedVideo.videoId}" fit={true}>
-	<div class="max-w-5xl grid grid-cols-[196px_1fr] gap-2">
+	<div class="recommended-video-card max-w-5xl">
 		{#if thumbnail}
 			<VideoThumbnail {thumbnail} lengthSeconds={recommendedVideo.lengthSeconds} />
 		{/if}
@@ -41,3 +41,16 @@
 		</div>
 	</div>
 </ClickableDivWrapper>
+
+<style>
+	.recommended-video-card {
+		display: grid;
+		grid-template-columns: 128px 1fr;
+		gap: 0.5rem;
+	}
+	@container (min-width: 400px) {
+		.recommended-video-card {
+			grid-template-columns: 168px 1fr;
+		}
+	}
+</style>
