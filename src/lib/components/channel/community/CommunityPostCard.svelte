@@ -23,7 +23,7 @@
 				<a href="/channel/{communityPost.authorId}" class="font-semibold">{communityPost.author}</a>
 				<p class="text-sm">{communityPost.publishedText}</p>
 			</div>
-			<div>{@html communityPost.contentHtml}</div>
+			<div class="youtube-html">{@html communityPost.contentHtml}</div>
 
 			{#if communityPost.attachment}
 				<CommunityPostAttachment attachment={communityPost.attachment} />

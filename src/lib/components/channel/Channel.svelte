@@ -45,7 +45,7 @@
 				class="flex gap-2 items-end dark:text-neutral-400"
 			>
 				{#if channel.description}
-					<span class="max-w-xl line-clamp-2">
+					<span class="youtube-html max-w-xl line-clamp-2">
 						{@html channel.descriptionHtml}
 					</span>
 				{:else}

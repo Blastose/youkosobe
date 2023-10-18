@@ -27,6 +27,10 @@ body {
 	height: 100%;
 }
 
+.youtube-html a {
+	color: #3ea6ff;
+}
+
 @layer components {
 	.container-youko {
 		@apply container px-4 mx-auto;

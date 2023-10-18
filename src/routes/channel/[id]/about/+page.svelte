@@ -11,7 +11,7 @@
 >
 	<div class="flex flex-col gap-4">
 		<h2 class="text-lg">Description</h2>
-		<div>
+		<div class="youtube-html">
 			{#if data.channel.description}
 				{@html data.channel.descriptionHtml}
 			{:else}

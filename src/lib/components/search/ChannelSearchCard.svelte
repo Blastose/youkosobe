@@ -32,7 +32,7 @@
 				</p>
 			</div>
 
-			<div class="line-clamp-2 text-sm dark:text-neutral-400">
+			<div class="youtube-html line-clamp-2 text-sm dark:text-neutral-400">
 				{@html channelObject.descriptionHtml}
 			</div>
 		</div>

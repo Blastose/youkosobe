@@ -22,7 +22,7 @@
 				<span class="dark:text-neutral-400">{comment.publishedText}</span>
 			</div>
 
-			<div>
+			<div class="youtube-html">
 				{@html comment.contentHtml}
 			</div>
 		</div>
