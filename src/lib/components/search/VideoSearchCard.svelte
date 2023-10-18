@@ -10,7 +10,7 @@
 		videoObject.videoThumbnails.at(0);
 </script>
 
-<ClickableDivWrapper href="/watch?={videoObject.videoId}" fit={true}>
+<ClickableDivWrapper href="/watch?v={videoObject.videoId}" fit={true}>
 	<div class="max-w-5xl grid grid-cols-[128px_1fr] sm:grid-cols-[246px_1fr] gap-4">
 		{#if thumbnail}
 			<VideoThumbnail {thumbnail} lengthSeconds={videoObject.lengthSeconds} />

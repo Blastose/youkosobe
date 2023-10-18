@@ -17,7 +17,7 @@
 	export let type: 'video' | 'short' | 'stream';
 </script>
 
-<ClickableDivWrapper href="/watch?={videoId}">
+<ClickableDivWrapper href="/watch?v={videoId}">
 	<div class="flex flex-col gap-1">
 		<VideoThumbnail thumbnail={videoThumbnail} {lengthSeconds} />
 
