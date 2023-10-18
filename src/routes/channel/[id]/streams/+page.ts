@@ -7,7 +7,7 @@ export const load: PageLoad = async ({ params, parent }) => {
 
 	const parentData = await parent();
 	if (!parentData.channel.tabs.find((v) => v === 'streams')) {
-		throw redirect(301, `/channel/${parentData.channel.authorId}`);
+		throw redirect(302, `/channel/${parentData.channel.authorId}`);
 	}
 	const invidious = new Invidious('https://invidious.fdn.fr');
 	const streams = await invidious.getChannelStreams(id);

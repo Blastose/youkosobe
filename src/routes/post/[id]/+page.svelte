@@ -34,7 +34,7 @@
 			<p>{comments.commentCount} Comments</p>
 			<div class="flex flex-col gap-6">
 				{#each comments.comments as comment}
-					<CommentWrapper {comment} postId={data.postId} type="community" />
+					<CommentWrapper {comment} id={data.postId} type="community" />
 				{/each}
 			</div>
 		</div>

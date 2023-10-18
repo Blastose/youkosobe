@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Header from './Header.svelte';
 	import Sidebar from './Sidebar.svelte';
 </script>
@@ -10,7 +11,10 @@
 
 	<div class="filler" />
 
-	<div class="sidebar layout-bg invisible -ml-64 lg:visible sidebar-animation lg:ml-0">
+	<div
+		class="sidebar layout-bg invisible -ml-64 lg:visible sidebar-animation
+	 {$page.url.pathname.startsWith('/watch') ? '' : 'lg:ml-0'}"
+	>
 		<Sidebar />
 	</div>
 

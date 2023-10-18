@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Comment } from '$lib/invidious/types';
-	import Commenta from './Comment.svelte';
+	import CommentW from './Comment.svelte';
 	import { IconChevronDown, IconChevronUp, IconCornerDownRight } from '@tabler/icons-svelte';
 	import { Invidious } from '$lib/invidious/invidious';
 	import Loading from '../layout/Loading.svelte';
 
-	export let postId: string;
+	export let id: string;
 	export let comment: Comment;
 	export let type: 'community' | 'video';
 
@@ -20,13 +20,20 @@
 		gettingReplies = true;
 		const invidious = new Invidious('https://invidious.fdn.fr');
 
-		// TODO change based on type = community or video
-		type;
-		const fetchedReplies = await invidious.getChannelCommunityPostComments(postId, {
-			ucid: comment.authorId,
-			action: 'action_get_comment_replies',
-			continuation: continuation
-		});
+		let fetchedReplies;
+		if (type === 'community') {
+			fetchedReplies = await invidious.getChannelCommunityPostComments(id, {
+				ucid: comment.authorId,
+				action: 'action_get_comment_replies',
+				continuation: continuation
+			});
+		} else {
+			fetchedReplies = await invidious.getCommentsById(id, {
+				action: 'action_get_comment_replies',
+				continuation: continuation
+			});
+		}
+
 		gettingReplies = false;
 		continuation = fetchedReplies.continuation;
 		if (!continuation) {
@@ -44,7 +51,7 @@
 	}
 </script>
 
-<Commenta {comment}>
+<CommentW {comment}>
 	<div class="flex flex-col gap-4">
 		{#if comment.replies}
 			<button
@@ -70,7 +77,7 @@
 		{#if showReplies}
 			<div class="flex flex-col gap-4">
 				{#each replies as reply}
-					<Commenta comment={reply} />
+					<CommentW comment={reply} />
 				{/each}
 
 				{#if gettingReplies}
@@ -90,4 +97,4 @@
 			</div>
 		{/if}
 	</div>
-</Commenta>
+</CommentW>

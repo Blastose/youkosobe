@@ -1,0 +1,68 @@
+<script lang="ts">
+	import type { GetVideoById } from '$lib/invidious/types';
+	import { tick } from 'svelte';
+	import { convertNewlinesToBr } from '../layout/utils';
+	import { numberFormatter } from '../video/utils';
+
+	export let video: GetVideoById;
+	export let handleDescriptionCollapse: () => void;
+	let descriptionExpanded = false;
+
+	function toggleDescription() {
+		descriptionExpanded = !descriptionExpanded;
+	}
+</script>
+
+<div
+	on:click={() => {
+		if (!descriptionExpanded) {
+			toggleDescription();
+		}
+	}}
+	on:keydown={(e) => {
+		if (e.key !== 'Enter' || e.currentTarget !== e.target) return;
+
+		e.preventDefault();
+		if (!descriptionExpanded) {
+			toggleDescription();
+		}
+	}}
+	role="link"
+	tabindex="0"
+	class="{descriptionExpanded ? 'cursor-auto' : 'cursor-pointer'} w-fit h-fit"
+>
+	<div
+		class="flex flex-col gap-2 rounded-xl p-4 dark:bg-neutral-800
+  {descriptionExpanded ? '' : 'duration-300 dark:hover:bg-neutral-700 '}"
+	>
+		<p class="flex flex-wrap gap-x-2 font-semibold">
+			{#if !descriptionExpanded}
+				<span>{numberFormatter.format(video.viewCount)} views</span>
+			{:else}
+				<span>{video.viewCount.toLocaleString()} views</span>
+			{/if}
+
+			<span>{video.publishedText}</span>
+
+			{#each video.keywords.slice(0, 3) as keyword}
+				<a class="text-[var(--link-color)]" href="/hashtag/{keyword}">#{keyword}</a>
+			{/each}
+		</p>
+
+		<div class:line-clamp-3={!descriptionExpanded} class="youtube-html">
+			{@html convertNewlinesToBr(video.descriptionHtml)}
+		</div>
+
+		{#if descriptionExpanded}
+			<button
+				class="w-fit font-semibold"
+				on:click={async (e) => {
+					descriptionExpanded = false;
+					e.stopPropagation();
+					await tick();
+					handleDescriptionCollapse();
+				}}>Show less</button
+			>
+		{/if}
+	</div>
+</div>

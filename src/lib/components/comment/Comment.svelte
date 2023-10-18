@@ -10,7 +10,7 @@
 
 <div class="grid max-w-4xl grid-cols-[min-content_1fr] gap-2 sm:gap-4">
 	{#if authorThumbnail}
-		<a href={comment.authorUrl}>
+		<a class="h-fit" href={comment.authorUrl}>
 			<AuthorThumbnail thumbnailObject={authorThumbnail} />
 		</a>
 	{/if}
@@ -27,8 +27,8 @@
 			</div>
 		</div>
 
-		<p class="text-sm dark:text-neutral-300 flex gap-1 items-center">
-			<IconThumbUp size={16} />
+		<p class="dark:text-neutral-300 flex gap-1 items-center">
+			<IconThumbUp />
 			{numberFormatter.format(comment.likeCount)}
 		</p>
 

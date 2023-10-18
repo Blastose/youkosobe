@@ -27,6 +27,7 @@ export type GetVideoByIdParams = {
 };
 
 export type GetVideoById = {
+	type: 'video';
 	title: string;
 	videoId: string;
 	videoThumbnails: ThumbnailObject[];
@@ -116,9 +117,10 @@ export type GetVideoById = {
 };
 
 export type GetCommentsByIdParams = {
-	sort_by: 'top' | 'new';
-	source: 'youtube' | 'reddit';
-	continuation: string;
+	sort_by?: 'top' | 'new';
+	source?: 'youtube' | 'reddit';
+	continuation?: string;
+	action?: 'action_get_comment_replies';
 };
 
 export type Comment = {
