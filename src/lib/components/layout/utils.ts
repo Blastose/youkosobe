@@ -6,3 +6,7 @@ export function buildPageTitle(title?: string) {
 	}
 	return base;
 }
+
+export function convertNewlinesToBr(text: string) {
+	return text.replaceAll(/\n/g, '<br>');
+}

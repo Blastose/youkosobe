@@ -27,6 +27,7 @@ export type GetVideoByIdParams = {
 };
 
 export type GetVideoById = {
+	type: 'video' | 'livestream' | 'scheduled';
 	title: string;
 	videoId: string;
 	videoThumbnails: ThumbnailObject[];
@@ -111,14 +112,16 @@ export type GetVideoById = {
 		videoThumbnails: ThumbnailObject[];
 		author: string;
 		lengthSeconds: number;
+		viewCount: number;
 		viewCountText: string;
 	}[];
 };
 
 export type GetCommentsByIdParams = {
-	sort_by: 'top' | 'new';
-	source: 'youtube' | 'reddit';
-	continuation: string;
+	sort_by?: 'top' | 'new';
+	source?: 'youtube' | 'reddit';
+	continuation?: string;
+	action?: 'action_get_comment_replies';
 };
 
 export type Comment = {
@@ -134,6 +137,8 @@ export type Comment = {
 
 	isEdited: boolean;
 	isPinned: boolean;
+	isSponsor?: boolean;
+	sponsorIconUrl?: string;
 
 	content: string;
 	contentHtml: string;

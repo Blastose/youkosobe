@@ -15,7 +15,9 @@
 		alt=""
 		loading="lazy"
 	/>
-	<span class="absolute bottom-2 right-2 bg-black bg-opacity-80 rounded-md p-1 text-xs">
-		{formatTime(lengthSeconds)}
-	</span>
+	{#if lengthSeconds !== 0}
+		<span class="absolute bottom-2 right-2 bg-black bg-opacity-80 rounded-md p-1 text-xs">
+			{formatTime(lengthSeconds)}
+		</span>
+	{/if}
 </div>

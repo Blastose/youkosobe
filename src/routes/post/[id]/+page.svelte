@@ -5,6 +5,7 @@
 	import type { GetChannelCommunityPostComments } from '$lib/invidious/types.js';
 	import { onMount } from 'svelte';
 	import CommentWrapper from '$lib/components/comment/CommentWrapper.svelte';
+	import Loading from '$lib/components/layout/Loading.svelte';
 
 	export let data;
 
@@ -34,11 +35,16 @@
 			<p>{comments.commentCount} Comments</p>
 			<div class="flex flex-col gap-6">
 				{#each comments.comments as comment}
-					<CommentWrapper {comment} postId={data.postId} type="community" />
+					<CommentWrapper
+						channelName={post?.author ?? ''}
+						{comment}
+						id={data.postId}
+						type="community"
+					/>
 				{/each}
 			</div>
 		</div>
 	{:else}
-		<p>Loading comments</p>
+		<Loading />
 	{/if}
 </div>
