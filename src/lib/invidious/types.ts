@@ -416,11 +416,11 @@ export type GetSearchSuggestions = {
 export type GetSearchParams = {
 	q: string;
 	page: number;
-	sort_by: 'relevance' | 'rating' | 'upload_date' | 'view_count';
-	date: 'hour' | 'today' | 'week' | 'month' | 'year';
-	duration: 'short' | 'long' | 'medium';
-	type: 'video' | 'playlist' | 'channel' | 'movie' | 'show' | 'all';
-	features: (
+	sort_by?: 'relevance' | 'rating' | 'upload_date' | 'view_count';
+	date?: 'hour' | 'today' | 'week' | 'month' | 'year';
+	duration?: 'short' | 'long' | 'medium';
+	type?: 'video' | 'playlist' | 'channel' | 'movie' | 'show' | 'all';
+	features?: (
 		| 'hd'
 		| 'subtitles'
 		| 'creative_commons'
@@ -433,7 +433,7 @@ export type GetSearchParams = {
 		| 'hdr'
 		| 'vr180'
 	)[];
-	region: ISO3166;
+	region?: ISO3166;
 };
 
 export type GetSearch =
@@ -444,10 +444,13 @@ export type GetSearch =
 			author: string;
 			authorId: string;
 			authorUrl: string;
+			authorVerified: boolean;
 			videoThumbnails: ThumbnailObject[];
 			description: string;
 			descriptionHtml: string;
 			viewCount: number;
+			viewCountText: string;
+			isUpcoming: boolean;
 			published: number;
 			publishedText: string;
 			lengthSeconds: number;
@@ -478,6 +481,7 @@ export type GetSearch =
 			author: string;
 			authorId: string;
 			authorUrl: string;
+			authorVerified: boolean;
 
 			authorThumbnails: {
 				url: string;

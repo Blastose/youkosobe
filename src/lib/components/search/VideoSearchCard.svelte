@@ -27,7 +27,7 @@
 						authorUrl={videoObject.authorUrl}
 						authorVerified={videoObject.authorVerified}
 					/>
-					{videoObject.viewCountText} views • {videoObject.publishedText}
+					{videoObject.viewCountText} • {videoObject.publishedText}
 				</p>
 			</div>
 
