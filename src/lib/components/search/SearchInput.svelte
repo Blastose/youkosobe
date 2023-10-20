@@ -39,17 +39,29 @@
 		if (searchSuggestions.length === 0) return;
 		if (loadingSearchSuggestions) return;
 		e.preventDefault();
-		console.log(e.key);
 		if (e.key === 'ArrowUp') {
 			searchSuggestionsIndex =
 				(searchSuggestionsIndex - 1 + searchSuggestions.length) % searchSuggestions.length;
 		} else if (e.key === 'ArrowDown') {
 			searchSuggestionsIndex = (searchSuggestionsIndex + 1) % searchSuggestions.length;
 		}
-		console.log(searchSuggestions[searchSuggestionsIndex]);
 		inputElement.value = searchSuggestions[searchSuggestionsIndex];
 		inputText = inputElement.value;
-		console.log(inputElement.value);
+
+		highlightSearchSuggestionItem(searchSuggestionsIndex);
+	}
+
+	function highlightSearchSuggestionItem(index: number) {
+		const bus =
+			searchSuggestionsContainer.querySelectorAll<HTMLButtonElement>('button[data-index]');
+
+		for (const i of bus) {
+			if (i.dataset.index === String(index)) {
+				i.style.backgroundColor = 'rgb(64 64 64)';
+			} else {
+				i.style.backgroundColor = '';
+			}
+		}
 	}
 
 	function clearAll() {
@@ -93,7 +105,6 @@
 	}, 300);
 </script>
 
-{inputText}
 <form
 	use:jumpToSearchInput
 	on:submit={(e) => {
@@ -101,6 +112,7 @@
 		goto(`/results?q=${inputElement.value}`);
 		inputIsFocused = false;
 		inputElement.blur();
+		searchSuggestions = [];
 	}}
 	class="flex-grow flex justify-center"
 	method="get"
@@ -161,7 +173,7 @@
 					bind:this={searchSuggestionsContainer}
 					class="w-full absolute top-12 bg-neutral-900 py-4 rounded-lg"
 				>
-					{#each searchSuggestions.slice(1) as suggestion}
+					{#each searchSuggestions.slice(1) as suggestion, index}
 						<button
 							type="button"
 							tabindex="-1"
@@ -169,8 +181,18 @@
 								setInputText(suggestion);
 								goto(`results?q=${suggestion}`);
 								inputIsFocused = false;
+								searchSuggestions = [];
 							}}
-							class="w-full text-left flex items-center gap-4 hover:bg-neutral-700 px-4 py-2 font-semibold"
+							on:mouseenter={() => {
+								highlightSearchSuggestionItem(index + 1);
+								searchSuggestionsIndex = index + 1;
+							}}
+							on:mouseleave={() => {
+								highlightSearchSuggestionItem(index + 1);
+								searchSuggestionsIndex = index + 1;
+							}}
+							data-index={index + 1}
+							class="w-full text-left flex items-center gap-4 px-4 py-2 font-semibold"
 						>
 							<IconSearch />
 							{suggestion}
