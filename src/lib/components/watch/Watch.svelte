@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { GetCommentsById, GetVideoById } from '$lib/invidious/types';
+	import type { GetCommentsById, GetPlaylistsByPlid, GetVideoById } from '$lib/invidious/types';
 	import Loading from '../layout/Loading.svelte';
+	import PlaylistWatchContainer from '../playlist/PlaylistWatchContainer.svelte';
 	import RecommendedVideoCard from '../video/RecommendedVideoCard.svelte';
 	import WatchAuthorActions from './WatchAuthorActions.svelte';
 	import WatchComments from './WatchComments.svelte';
@@ -9,6 +10,7 @@
 	export let video: GetVideoById;
 	export let commentObject: GetCommentsById | 'commentsDisabled' | undefined;
 	export let initialTimestamp: number;
+	export let playlist: GetPlaylistsByPlid | undefined;
 
 	let videoTitleElement: HTMLParagraphElement;
 	let videoElement: HTMLVideoElement;
@@ -104,7 +106,11 @@
 		{/if}
 	</div>
 
-	<div class="recommended-videos-container flex flex-col gap-2">
+	<div class="recommended-videos-container flex flex-col gap-4">
+		{#if playlist}
+			<PlaylistWatchContainer {playlist} />
+		{/if}
+
 		{#each video.recommendedVideos as recommendedVideo}
 			<div>
 				<RecommendedVideoCard {recommendedVideo} />

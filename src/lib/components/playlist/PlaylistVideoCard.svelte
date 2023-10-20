@@ -7,6 +7,7 @@
 	export let playlistId: string;
 	export let index: number;
 	export let videoObject: GetPlaylistsByPlid['videos'][number];
+	export let thumbnailSize: 'small' | 'normal' = 'normal';
 	$: thumbnail =
 		videoObject.videoThumbnails.find((v) => v.quality === 'medium') ??
 		videoObject.videoThumbnails.at(0);
@@ -14,14 +15,20 @@
 </script>
 
 <ClickableDivWrapper {href} fit={true}>
-	<div class="max-w-5xl grid grid-cols-[160px_1fr] gap-4">
+	<div
+		class="max-w-5xl grid gap-4
+		{thumbnailSize === 'small' ? 'grid-cols-[100px_1fr]' : 'grid-cols-[160px_1fr]'}"
+	>
 		{#if thumbnail}
 			<VideoThumbnail {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
 		{/if}
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<a {href} class="text-lg font-semibold">
+				<a
+					{href}
+					class={thumbnailSize === 'small' ? 'font-semibold line-clamp-2' : 'text-lg font-semibold'}
+				>
 					{videoObject.title}
 				</a>
 				<p class="text-sm dark:text-neutral-400">

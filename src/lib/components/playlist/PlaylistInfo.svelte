@@ -5,7 +5,9 @@
 
 	export let playlist: GetPlaylistsByPlid;
 
-	$: playlistWatchUrl = `/watch?v=${playlist.videos.at(0)?.videoId}&list=${playlist.playlistId}`;
+	$: playlistWatchUrl = `/watch?v=${playlist.videos.at(0)?.videoId}&list=${
+		playlist.playlistId
+	}&index=1`;
 </script>
 
 <div

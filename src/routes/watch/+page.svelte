@@ -35,6 +35,11 @@
 
 <div class="container-youko pt-8">
 	{#key data.id}
-		<Watch video={data.video} {commentObject} initialTimestamp={data.initialTimestamp} />
+		<Watch
+			video={data.video}
+			{commentObject}
+			initialTimestamp={data.initialTimestamp}
+			playlist={data.playlist}
+		/>
 	{/key}
 </div>

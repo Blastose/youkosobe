@@ -506,9 +506,14 @@ export type GetSearch =
 	  };
 [];
 
-export type GetPlaylistsByPlidParams = {
-	page: number;
-};
+export type GetPlaylistsByPlidParams =
+	| {
+			page: number;
+	  }
+	| {
+			index: number;
+			continuation: string;
+	  };
 
 export type GetPlaylistsByPlid = {
 	title: string;
