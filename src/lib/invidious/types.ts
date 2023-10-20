@@ -413,26 +413,36 @@ export type GetSearchSuggestions = {
 	suggestions: string[];
 };
 
+export const sortByArray = ['relevance', 'rating', 'date', 'view_count'] as const;
+export type SortBy = (typeof sortByArray)[number];
+export const dateArray = ['none', 'hour', 'today', 'week', 'month', 'year'] as const;
+export type DateOption = (typeof dateArray)[number];
+export const durationArray = ['none', 'short', 'long', 'medium'] as const;
+export type Duration = (typeof durationArray)[number];
+export const typeArray = ['all', 'video', 'playlist', 'channel', 'movie', 'show', 'all'] as const;
+export type ResultType = (typeof typeArray)[number];
+export const featuresArray = [
+	'hd',
+	'subtitles',
+	'creative_commons',
+	'3d',
+	'live',
+	'purchased',
+	'4k',
+	'360',
+	'location',
+	'hdr',
+	'vr180'
+] as const;
+export type VideoFeatures = (typeof featuresArray)[number];
 export type GetSearchParams = {
 	q: string;
 	page: number;
-	sort_by?: 'relevance' | 'rating' | 'upload_date' | 'view_count';
-	date?: 'hour' | 'today' | 'week' | 'month' | 'year';
-	duration?: 'short' | 'long' | 'medium';
-	type?: 'video' | 'playlist' | 'channel' | 'movie' | 'show' | 'all';
-	features?: (
-		| 'hd'
-		| 'subtitles'
-		| 'creative_commons'
-		| '3d'
-		| 'live'
-		| 'purchased'
-		| '4k'
-		| '360'
-		| 'location'
-		| 'hdr'
-		| 'vr180'
-	)[];
+	sort?: SortBy;
+	date?: DateOption;
+	duration?: Duration;
+	type?: ResultType;
+	features?: VideoFeatures[];
 	region?: ISO3166;
 };
 

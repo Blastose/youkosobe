@@ -44,7 +44,11 @@ function buildQueryString(params?: QueryParams): string {
 	Object.entries(params).forEach(([name, recordValue], index) => {
 		let value: string | number = '';
 		if (Array.isArray(recordValue)) {
-			value = recordValue.join(',');
+			if (recordValue.length > 0) {
+				value = recordValue.join(',');
+			} else {
+				return;
+			}
 		} else {
 			value = recordValue;
 		}
@@ -183,6 +187,8 @@ export class Invidious {
 
 	async getSearch(params: GetSearchParams) {
 		const url = `${this.apiVersionPrefix}/search`;
+		console.log(`${this.instanceUrl}${url}?hl=${this.lang}&${buildQueryString(params)}`);
+
 		return await this.get<GetSearch[]>(url, params);
 	}
 

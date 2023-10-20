@@ -7,6 +7,7 @@
 	import PlaylistSearchCard from './PlaylistSearchCard.svelte';
 	import VideoSearchCard from './VideoSearchCard.svelte';
 	import { getSearchFromUrl } from './utils';
+	import Filter from './filter/Filter.svelte';
 
 	export let results: GetSearch[];
 
@@ -44,6 +45,10 @@
 </script>
 
 <div class="flex flex-col gap-4">
+	<div class="self-end">
+		<Filter />
+	</div>
+
 	{#each results as result}
 		{#if result.type === 'video'}
 			<VideoSearchCard videoObject={result} />
