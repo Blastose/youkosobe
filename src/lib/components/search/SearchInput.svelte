@@ -1,0 +1,175 @@
+<script lang="ts">
+	import { Invidious } from '$lib/invidious/invidious';
+	import { clickOutside } from '$lib/components/layout/utils';
+	import debounce from 'just-debounce-it';
+	import { IconSearch, IconX } from '@tabler/icons-svelte';
+	import { fade } from 'svelte/transition';
+	import Loading from '../layout/Loading.svelte';
+
+	let searchSuggestions: string[] = [];
+	let searchSuggestionsIndex = 0;
+	let inputElement: HTMLInputElement;
+	let inputText: string = '';
+	let inputIsFocused: boolean = false;
+	let loadingSearchSuggestions: boolean = false;
+	let searchSuggestionsContainer: HTMLDivElement;
+
+	function jumpToSearchInput(_node: HTMLFormElement) {
+		const jumpTosearch = (e: KeyboardEvent) => {
+			if (e.key === '/') {
+				if (document.activeElement !== inputElement) {
+					e.preventDefault();
+					inputElement.focus();
+				}
+			}
+		};
+
+		addEventListener('keydown', jumpTosearch);
+
+		return {
+			destroy() {
+				removeEventListener('keydown', jumpTosearch);
+			}
+		};
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+		if (searchSuggestions.length === 0) return;
+		if (loadingSearchSuggestions) return;
+		e.preventDefault();
+		console.log(e.key);
+		if (e.key === 'ArrowUp') {
+			searchSuggestionsIndex =
+				(searchSuggestionsIndex - 1 + searchSuggestions.length) % searchSuggestions.length;
+		} else if (e.key === 'ArrowDown') {
+			searchSuggestionsIndex = (searchSuggestionsIndex + 1) % searchSuggestions.length;
+		}
+		console.log(searchSuggestions[searchSuggestionsIndex]);
+		inputElement.value = searchSuggestions[searchSuggestionsIndex];
+		inputText = inputElement.value;
+		console.log(inputElement.value);
+	}
+
+	function clearAll() {
+		inputText = '';
+		inputElement.value = '';
+		searchSuggestions = [];
+	}
+
+	// For some reason, the invidious api response returns escaped html charaters
+	// for other languages like japanese
+	function decodeHtml(input: string) {
+		const doc = new DOMParser().parseFromString(input, 'text/html');
+		return doc.documentElement.textContent ?? '';
+	}
+
+	// We load the search suggestions into an array and also add the current
+	// search input so we can iterate over it when pressing the up/down keys
+	async function getSearchSuggestions(q: string) {
+		loadingSearchSuggestions = true;
+		const invidious = new Invidious('https://invidious.fdn.fr');
+		try {
+			const result = await invidious.getSearchSuggestions({ q });
+			searchSuggestions = [inputText];
+			searchSuggestions = searchSuggestions.concat(result.suggestions.map((v) => decodeHtml(v)));
+			searchSuggestionsIndex = 0;
+			loadingSearchSuggestions = false;
+			console.log(searchSuggestions);
+		} catch {
+			searchSuggestions = [inputText];
+			searchSuggestionsIndex = 0;
+			loadingSearchSuggestions = false;
+		}
+	}
+
+	const debounceGetSearchSuggestions = debounce(() => {
+		getSearchSuggestions(inputElement.value);
+	}, 300);
+</script>
+
+<form
+	use:jumpToSearchInput
+	on:submit={() => {
+		console.log('submitting');
+		inputElement.value = inputText;
+		inputIsFocused = false;
+		inputElement.blur();
+	}}
+	class="flex-grow flex justify-center"
+	method="get"
+	action="/results"
+>
+	<div
+		use:clickOutside
+		on:outclick={() => {
+			console.log('jaslkjksd');
+			inputIsFocused = false;
+		}}
+		class="relative w-full max-w-[568px]"
+	>
+		<input
+			autocomplete="off"
+			on:focus={() => {
+				inputIsFocused = true;
+			}}
+			on:input={(e) => {
+				console.log('ejaskdj');
+				inputText = e.currentTarget.value;
+				searchSuggestions = [];
+				searchSuggestionsIndex = 0;
+				if (inputText === '') {
+					clearAll();
+				} else {
+					debounceGetSearchSuggestions();
+				}
+			}}
+			on:keydown={handleKeydown}
+			bind:this={inputElement}
+			name="q"
+			maxlength={100}
+			class="w-full
+    outline-none ring-1 ring-[#696969] focus:ring-blue-500
+    pl-4 pr-12 py-2 rounded-3xl dark:bg-[var(--dark-500)]"
+			type="text"
+			placeholder="Search"
+		/>
+
+		{#if inputText}
+			<button
+				on:click={clearAll}
+				transition:fade={{ duration: 150 }}
+				class="absolute right-2 p-2"
+				type="button"
+			>
+				<IconX stroke={1} />
+			</button>
+		{/if}
+
+		{#if inputIsFocused}
+			{#if loadingSearchSuggestions}
+				<div class="w-full absolute top-12 bg-neutral-900 py-4 rounded-lg">
+					<Loading />
+				</div>
+			{:else if searchSuggestions.length > 0}
+				<div
+					bind:this={searchSuggestionsContainer}
+					class="w-full absolute top-12 bg-neutral-900 py-4 rounded-lg"
+				>
+					{#each searchSuggestions.slice(1) as suggestion}
+						<button
+							type="submit"
+							on:click={() => {
+								inputElement.value = suggestion;
+							}}
+							class="w-full text-left flex items-center gap-4 hover:bg-neutral-700 px-4 py-2 font-semibold"
+						>
+							<IconSearch />
+							{suggestion}
+						</button>
+					{/each}
+				</div>
+			{/if}
+		{/if}
+	</div>
+</form>

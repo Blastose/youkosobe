@@ -178,7 +178,7 @@ export class Invidious {
 
 	async getSearchSuggestions(params: GetSearchSuggestionsParams) {
 		const url = `${this.apiVersionPrefix}/search/suggestions`;
-		return await this.get<GetSearchSuggestions[]>(url, params);
+		return await this.get<GetSearchSuggestions>(url, params);
 	}
 
 	async getSearch(params: GetSearchParams) {

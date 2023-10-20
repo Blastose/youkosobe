@@ -9,5 +9,7 @@
 <svelte:head><title>{buildPageTitle(data.searchQuery)}</title></svelte:head>
 
 <div class="container-youko max-w-5xl pt-8">
+	{#key data.searchQuery}
 	<Results results={data.searchResults} />
+	{/key}
 </div>
