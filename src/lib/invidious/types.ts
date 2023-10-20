@@ -413,7 +413,7 @@ export type GetSearchSuggestions = {
 	suggestions: string[];
 };
 
-export const sortByArray = ['relevance', 'rating', 'date', 'view_count'] as const;
+export const sortByArray = ['relevance', 'rating', 'date', 'views'] as const;
 export type SortBy = (typeof sortByArray)[number];
 export const dateArray = ['none', 'hour', 'today', 'week', 'month', 'year'] as const;
 export type DateOption = (typeof dateArray)[number];

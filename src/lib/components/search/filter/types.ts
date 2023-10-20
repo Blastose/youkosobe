@@ -129,7 +129,7 @@ export const sortByArrayRadio: InputGroup<SortBy>[] = [
 	},
 	{
 		display: 'View count',
-		value: 'view_count'
+		value: 'views'
 	},
 	{
 		display: 'Rating',
