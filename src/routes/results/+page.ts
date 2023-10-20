@@ -1,6 +1,5 @@
 import type { PageLoad } from './$types';
 import { Invidious } from '$lib/invidious/invidious';
-import { redirect } from '@sveltejs/kit';
 import type { GetSearchParams } from '$lib/invidious/types';
 
 function castSearchParamsToType<T>(searchParam: string | string[] | null) {
@@ -9,11 +8,7 @@ function castSearchParamsToType<T>(searchParam: string | string[] | null) {
 }
 
 export const load: PageLoad = async ({ url }) => {
-	const search_query = url.searchParams.get('q');
-
-	if (!search_query) {
-		throw redirect(302, '/results?q=');
-	}
+	const search_query = url.searchParams.get('q') ?? '';
 
 	const date = castSearchParamsToType<GetSearchParams['date']>(url.searchParams.get('date'));
 	const type = castSearchParamsToType<GetSearchParams['type']>(url.searchParams.get('type'));

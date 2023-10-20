@@ -30,3 +30,21 @@ export const clickOutside: Action<Node, Node | undefined, { 'on:outclick': () =>
 		}
 	};
 };
+
+export const mousedownOutside: Action<Node, Node | undefined, { 'on:mouseoutside': () => void }> = (
+	node: Node,
+	toggleButton?: Node
+) => {
+	const handleClick = (event: Event) => {
+		if (!node.contains(event.target as Node) && !toggleButton?.contains(event.target as Node)) {
+			node.dispatchEvent(new CustomEvent('mouseoutside'));
+		}
+	};
+	document.addEventListener('mousedown', handleClick, true);
+
+	return {
+		destroy() {
+			document.removeEventListener('mousedown', handleClick, true);
+		}
+	};
+};

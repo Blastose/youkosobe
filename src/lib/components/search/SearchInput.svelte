@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { Invidious } from '$lib/invidious/invidious';
-	import { clickOutside } from '$lib/components/layout/utils';
+	import { mousedownOutside } from '$lib/components/layout/utils';
 	import debounce from 'just-debounce-it';
 	import { IconSearch, IconX } from '@tabler/icons-svelte';
 	import { fade } from 'svelte/transition';
 	import Loading from '../layout/Loading.svelte';
+	import { goto } from '$app/navigation';
 
 	let searchSuggestions: string[] = [];
 	let searchSuggestionsIndex = 0;
@@ -52,7 +53,6 @@
 	}
 
 	function clearAll() {
-		inputText = '';
 		inputElement.value = '';
 		searchSuggestions = [];
 	}
@@ -83,16 +83,22 @@
 		}
 	}
 
+	function setInputText(text: string) {
+		inputElement.value = text;
+		inputText = text;
+	}
+
 	const debounceGetSearchSuggestions = debounce(() => {
 		getSearchSuggestions(inputElement.value);
 	}, 300);
 </script>
 
+{inputText}
 <form
 	use:jumpToSearchInput
-	on:submit={() => {
-		console.log('submitting');
-		inputElement.value = inputText;
+	on:submit={(e) => {
+		e.preventDefault();
+		goto(`/results?q=${inputElement.value}`);
 		inputIsFocused = false;
 		inputElement.blur();
 	}}
@@ -101,9 +107,8 @@
 	action="/results"
 >
 	<div
-		use:clickOutside
-		on:outclick={() => {
-			console.log('jaslkjksd');
+		use:mousedownOutside
+		on:mouseoutside={() => {
 			inputIsFocused = false;
 		}}
 		class="relative w-full max-w-[568px]"
@@ -115,16 +120,16 @@
 			}}
 			on:input={(e) => {
 				console.log('ejaskdj');
-				inputText = e.currentTarget.value;
 				searchSuggestions = [];
 				searchSuggestionsIndex = 0;
-				if (inputText === '') {
+				if (e.currentTarget.value === '') {
 					clearAll();
 				} else {
 					debounceGetSearchSuggestions();
 				}
 			}}
 			on:keydown={handleKeydown}
+			bind:value={inputText}
 			bind:this={inputElement}
 			name="q"
 			maxlength={100}
@@ -151,16 +156,19 @@
 				<div class="w-full absolute top-12 bg-neutral-900 py-4 rounded-lg">
 					<Loading />
 				</div>
-			{:else if searchSuggestions.length > 0}
+			{:else if searchSuggestions.length > 1}
 				<div
 					bind:this={searchSuggestionsContainer}
 					class="w-full absolute top-12 bg-neutral-900 py-4 rounded-lg"
 				>
 					{#each searchSuggestions.slice(1) as suggestion}
 						<button
-							type="submit"
+							type="button"
+							tabindex="-1"
 							on:click={() => {
-								inputElement.value = suggestion;
+								setInputText(suggestion);
+								goto(`results?q=${suggestion}`);
+								inputIsFocused = false;
 							}}
 							class="w-full text-left flex items-center gap-4 hover:bg-neutral-700 px-4 py-2 font-semibold"
 						>
