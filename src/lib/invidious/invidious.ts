@@ -194,7 +194,7 @@ export class Invidious {
 
 	async getPlaylistsByPlid(plid: string, params: GetPlaylistsByPlidParams) {
 		const url = `${this.apiVersionPrefix}/playlists/${plid}`;
-		return await this.get<GetPlaylistsByPlid[]>(url, params);
+		return await this.get<GetPlaylistsByPlid>(url, params);
 	}
 
 	async getMixesByRdid(rdid: string) {

@@ -513,6 +513,7 @@ export type GetPlaylistsByPlidParams = {
 export type GetPlaylistsByPlid = {
 	title: string;
 	playlistId: string;
+	playlistThumbnail: string;
 
 	author: string;
 	authorId: string;
