@@ -123,7 +123,7 @@
 		on:mouseoutside={() => {
 			inputIsFocused = false;
 		}}
-		class="relative w-full max-w-[568px]"
+		class="relative flex w-full max-w-[568px]"
 	>
 		<input
 			autocomplete="off"
@@ -147,7 +147,7 @@
 			maxlength={100}
 			class="w-full
     outline-none ring-1 ring-[#696969] focus:ring-blue-500
-    pl-4 pr-12 py-2 rounded-3xl dark:bg-[var(--dark-500)]"
+    pl-4 pr-12 py-2 rounded-l-3xl dark:bg-[var(--dark-500)]"
 			type="text"
 			placeholder="Search"
 		/>
@@ -156,12 +156,21 @@
 			<button
 				on:click={clearAll}
 				transition:fade={{ duration: 150 }}
-				class="absolute right-2 p-2"
+				class="absolute right-16 p-2"
 				type="button"
+				aria-label="Clear input"
 			>
 				<IconX stroke={1} />
 			</button>
 		{/if}
+
+		<button
+			type="submit"
+			class="outline-none ring-1 focus:ring-blue-500 ring-[#696969]
+		py-2 px-4 rounded-r-3xl dark:bg-neutral-800"
+		>
+			<IconSearch stroke={1} />
+		</button>
 
 		{#if inputIsFocused}
 			{#if loadingSearchSuggestions}
