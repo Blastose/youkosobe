@@ -49,7 +49,7 @@
 				opacity: 0
 			}}
 		>
-			<div class="h-full">
+			<div>
 				<form method="get" action="/results" class="flex h-full flex-col gap-4 justify-between">
 					<div class="flex flex-col gap-4">
 						<p use:melt={$title} class="text-lg font-semibold">Search filters</p>
