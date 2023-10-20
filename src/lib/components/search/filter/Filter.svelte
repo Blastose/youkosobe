@@ -38,7 +38,7 @@
 		/>
 		<div
 			class="fixed left-[50%] top-[50%] z-50 h-[75vh] w-[75vw]
-            max-h-[470px] max-w-[768px]
+            max-h-[580px] max-w-[820px]
             translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white
             dark:bg-neutral-800
             p-6 shadow-lg overflow-y-auto"
@@ -49,12 +49,13 @@
 				opacity: 0
 			}}
 		>
-			<form method="get" action="/results" class="flex h-full flex-col gap-2 justify-between">
-				<div class="flex flex-col gap-4">
-					<p use:melt={$title} class="text-lg font-semibold">Search filters</p>
-					<input type="hidden" name="q" value={$page.url.searchParams.get('q')} />
-					<div>
-						<div class="grid grid-cols-5 gap-2">
+			<div class="h-full">
+				<form method="get" action="/results" class="flex h-full flex-col gap-4 justify-between">
+					<div class="flex flex-col gap-4">
+						<p use:melt={$title} class="text-lg font-semibold">Search filters</p>
+						<input type="hidden" name="q" value={$page.url.searchParams.get('q')} />
+
+						<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
 							<InputGroup
 								checkFirst={true}
 								type="radio"
@@ -91,16 +92,13 @@
 								values={sortByArrayRadio}
 							/>
 						</div>
-						<!-- Upload date => radio -->
-						<!-- Type => radio -->
-						<!-- Duration => radio -->
-						<!-- Features => checkbox group -->
-						<!-- Sort by => radio -->
 					</div>
-				</div>
 
-				<button use:melt={$close} type="submit">Apply filters</button>
-			</form>
+					<button class="dark:bg-neutral-700 rounded-3xl p-2" use:melt={$close} type="submit"
+						>Apply filters</button
+					>
+				</form>
+			</div>
 
 			<button
 				use:melt={$close}
