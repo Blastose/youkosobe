@@ -6,7 +6,8 @@
 </script>
 
 <div
-	on:click={() => {
+	on:click={(e) => {
+		if (e.ctrlKey) return;
 		goto(href);
 	}}
 	on:keydown={(e) => {
