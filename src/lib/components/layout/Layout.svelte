@@ -12,8 +12,8 @@
 	<div class="filler" />
 
 	<div
-		class="sidebar layout-bg invisible -ml-64 lg:visible sidebar-animation
-	 {$page.url.pathname.startsWith('/watch') ? '' : 'lg:ml-0'}"
+		class="sidebar layout-bg invisible -ml-64 xl:visible sidebar-animation
+	 {$page.url.pathname.startsWith('/watch') ? '' : 'xl:ml-0'}"
 	>
 		<Sidebar />
 	</div>

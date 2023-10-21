@@ -1,14 +1,18 @@
 <script lang="ts">
-	import type { GetCommentsById, GetVideoById } from '$lib/invidious/types';
+	import { goto } from '$app/navigation';
+	import type { GetCommentsById, GetPlaylistsByPlid, GetVideoById } from '$lib/invidious/types';
 	import Loading from '../layout/Loading.svelte';
+	import PlaylistWatchContainer from '../playlist/PlaylistWatchContainer.svelte';
 	import RecommendedVideoCard from '../video/RecommendedVideoCard.svelte';
 	import WatchAuthorActions from './WatchAuthorActions.svelte';
 	import WatchComments from './WatchComments.svelte';
 	import WatchDescription from './WatchDescription.svelte';
+	import { page } from '$app/stores';
 
 	export let video: GetVideoById;
 	export let commentObject: GetCommentsById | 'commentsDisabled' | undefined;
 	export let initialTimestamp: number;
+	export let playlist: GetPlaylistsByPlid | undefined;
 
 	let videoTitleElement: HTMLParagraphElement;
 	let videoElement: HTMLVideoElement;
@@ -57,6 +61,16 @@
 	function initVideo(el: HTMLVideoElement) {
 		el.currentTime = initialTimestamp;
 	}
+
+	function playNextVideoInPlaylist() {
+		if (!playlist) return;
+
+		const nextVideo = playlist.videos.find(
+			(v) => v.index === Number($page.url.searchParams.get('index'))
+		);
+		if (!nextVideo) return;
+		goto(`/watch?v=${nextVideo.videoId}&list=${playlist.playlistId}&index=${nextVideo.index}`);
+	}
 </script>
 
 <div
@@ -69,6 +83,7 @@
 				<video
 					use:initVideo
 					bind:this={videoElement}
+					on:ended={playNextVideoInPlaylist}
 					class="w-full"
 					src={stream.url}
 					controls
@@ -104,7 +119,11 @@
 		{/if}
 	</div>
 
-	<div class="recommended-videos-container flex flex-col gap-2">
+	<div class="recommended-videos-container flex flex-col gap-4">
+		{#if playlist}
+			<PlaylistWatchContainer {playlist} />
+		{/if}
+
 		{#each video.recommendedVideos as recommendedVideo}
 			<div>
 				<RecommendedVideoCard {recommendedVideo} />

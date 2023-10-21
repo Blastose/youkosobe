@@ -28,9 +28,9 @@
 </script>
 
 <div class="flex flex-col gap-6">
-	<div class="flex gap-8">
+	<div class="flex items-center gap-8">
 		<h2 class="text-lg">
-			{commentObject.commentCount ?? 0} Comments
+			{commentObject.commentCount?.toLocaleString() ?? 0} Comments
 		</h2>
 		<SortBy {getComments} {loadingComments} />
 	</div>

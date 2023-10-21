@@ -31,8 +31,11 @@
 
 			<div class="text-sm flex flex-col gap-4">
 				<div class="line-clamp-2">
-					{#each playlistObject.videos as video}
-						<a class="block" href="/watch?v={video.videoId}">
+					{#each playlistObject.videos as video, index}
+						<a
+							class="block"
+							href="/watch?v={video.videoId}&list=${playlistObject.playlistId}&index={index}"
+						>
 							{video.title} •
 							{formatTime(video.lengthSeconds)}
 						</a>
