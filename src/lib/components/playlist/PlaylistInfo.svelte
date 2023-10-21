@@ -15,19 +15,19 @@
 	style="background-image: url({playlist.playlistThumbnail});"
 >
 	<div
-		class="backdrop-blur-3xl bg-black bg-opacity-40
+		class="backdrop-blur-3xl rounded-3xl overflow-hidden bg-black bg-opacity-40
     p-4 grid grid-rows-[min-content_1fr] sm:grid-rows-none sm:grid-cols-2
     lg:grid-cols-none lg:grid-rows-[min-content_1fr] gap-2 sm:gap-4"
 	>
-		<div class="group relative flex justify-center w-full h-full">
+		<div class="group bg-black relative flex justify-center w-full h-full">
 			<a
 				href={playlistWatchUrl}
-				class="duration-200 group-hover:opacity-90 opacity-0 flex absolute h-full w-full rounded-3xl items-center justify-center bg-black"
+				class="duration-200 group-hover:opacity-90 opacity-0 flex absolute h-full w-full items-center justify-center bg-black"
 			>
 				<IconPlayerPlay />
 				Play all
 			</a>
-			<img class="w-full max-w-sm rounded-3xl" src={playlist.playlistThumbnail} alt="" />
+			<img class="object-contain w-full max-w-sm" src={playlist.playlistThumbnail} alt="" />
 		</div>
 
 		<div class="flex flex-col gap-4">
