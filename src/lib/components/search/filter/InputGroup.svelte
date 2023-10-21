@@ -18,7 +18,13 @@
 	{#each values as value, index}
 		{@const isChecked = searchParams.includes(value.value)}
 		<label class="flex items-center gap-2">
-			<input checked={isChecked || (checkFirst && index === 0)} {name} value={value.value} {type} />
+			<input
+				class="dark:accent-neutral-400"
+				checked={isChecked || (checkFirst && index === 0)}
+				{name}
+				value={value.value}
+				{type}
+			/>
 			{value.display}
 		</label>
 	{/each}
