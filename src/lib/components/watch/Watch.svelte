@@ -60,6 +60,12 @@
 
 	function initVideo(el: HTMLVideoElement) {
 		el.currentTime = initialTimestamp;
+		el.volume = Number(localStorage.getItem('playervolume')) ?? 0.5;
+		el.play();
+	}
+
+	function persistVolumeInLocalStorage(_: Event) {
+		localStorage.setItem('playervolume', String(videoElement.volume));
 	}
 
 	function playNextVideoInPlaylist() {
@@ -80,14 +86,15 @@
 	<div class="flex flex-col gap-4">
 		{#if stream}
 			<div class="rounded-lg overflow-hidden">
+				<!-- svelte-ignore a11y-media-has-caption -->
 				<video
 					use:initVideo
 					bind:this={videoElement}
 					on:ended={playNextVideoInPlaylist}
+					on:volumechange={persistVolumeInLocalStorage}
 					class="w-full max-h-[calc(80vh_-_var(--header-height))]"
 					src={stream.url}
 					controls
-					muted
 				/>
 			</div>
 		{/if}
