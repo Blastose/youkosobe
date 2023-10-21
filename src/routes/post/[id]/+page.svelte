@@ -6,8 +6,11 @@
 	import { onMount } from 'svelte';
 	import CommentWrapper from '$lib/components/comment/CommentWrapper.svelte';
 	import Loading from '$lib/components/layout/Loading.svelte';
+	import InfiniteScrolling from '$lib/components/layout/InfiniteScrolling.svelte';
 
 	export let data;
+	let noMoreSearchResults = false;
+	let continuation: string | undefined = undefined;
 
 	$: post = data.post.comments.at(0);
 	$: channelId = data.post.authorId;
@@ -19,6 +22,7 @@
 			ucid: channelId
 		});
 		comments = fetchedComments;
+		continuation = fetchedComments.continuation;
 		console.log(fetchedComments);
 	});
 </script>
@@ -43,6 +47,20 @@
 					/>
 				{/each}
 			</div>
+			<InfiniteScrolling
+				bind:results={comments.comments}
+				bind:noMoreSearchResults
+				fetchMoreResults={async () => {
+					const invidious = new Invidious('https://invidious.fdn.fr');
+					const fetchedComments = await invidious.getChannelCommunityPostComments(data.postId, {
+						ucid: channelId,
+						continuation
+					});
+					continuation = fetchedComments.continuation;
+					return fetchedComments.comments;
+				}}
+				onSuccess={async () => {}}
+			/>
 		</div>
 	{:else}
 		<Loading />
