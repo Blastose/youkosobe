@@ -16,7 +16,7 @@
 
 	let videoTitleElement: HTMLParagraphElement;
 	let videoElement: HTMLVideoElement;
-	$: stream = video.formatStreams.at(1);
+	$: stream = video.formatStreams.find((v) => v.type.startsWith('video/mp4;'));
 
 	function handleAnchorClick(e: MouseEvent) {
 		const target = e.target as HTMLElement | null;
