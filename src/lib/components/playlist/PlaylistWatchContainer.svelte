@@ -20,7 +20,7 @@
 	}
 </script>
 
-<div class="flex flex-col border border-[#696969] rounded-xl">
+<div class="flex flex-col border border-[var(--dark-outline)] rounded-xl">
 	<div class="py-3 px-4 dark:bg-neutral-800 flex flex-col rounded-t-xl gap-2">
 		<a href="/playlist?list={playlist.playlistId}" class="text-xl font-semibold">{playlist.title}</a
 		>

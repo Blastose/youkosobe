@@ -30,7 +30,7 @@
 					/>
 					{#if videoObject.publishedText === '0 seconds ago' && videoObject.viewCountText === '0 views'}
 						<span
-							class="flex gap-1 fond-semibold items-center px-1 dark:bg-red-700 text-white rounded-md w-fit"
+							class="flex gap-1 fond-semibold items-center px-1 dark:bg-red-700 text-[var(--dark-text)] rounded-md w-fit"
 						>
 							<IconBroadcast size={16} />
 							Live
