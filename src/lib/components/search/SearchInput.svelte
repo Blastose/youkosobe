@@ -146,7 +146,7 @@
 			name="q"
 			maxlength={100}
 			class="w-full
-    outline-none ring-1 ring-[#696969] focus:ring-blue-500
+    outline-none ring-1 ring-[var(--dark-outline)] focus:ring-blue-500
     pl-4 pr-12 py-2 rounded-l-3xl dark:bg-[var(--dark-500)]"
 			type="text"
 			placeholder="Search"
@@ -166,7 +166,7 @@
 
 		<button
 			type="submit"
-			class="outline-none ring-1 focus:ring-blue-500 ring-[#696969]
+			class="outline-none ring-1 focus:ring-blue-500 ring-[var(--dark-outline)]
 		py-2 px-4 rounded-r-3xl dark:bg-neutral-800"
 		>
 			<IconSearch stroke={1} />

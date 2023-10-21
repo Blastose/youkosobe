@@ -7,7 +7,11 @@
 	export let getComments: () => void;
 	export let loadingComments: boolean;
 
-	$: currentSort = $page.url.searchParams.get('sort_by');
+	function getCurrentSortFromPage(url: URL) {
+		return url.searchParams.get('sort_by');
+	}
+
+	$: currentSort = getCurrentSortFromPage($page.url);
 
 	const {
 		elements: { trigger, menu, item },
@@ -24,6 +28,7 @@
 		} else {
 			$page.url.searchParams.delete('sort_by');
 		}
+		currentSort = getCurrentSortFromPage($page.url);
 		history.replaceState('', '', $page.url);
 	}
 </script>

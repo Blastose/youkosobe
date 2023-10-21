@@ -6,7 +6,7 @@
 	export let results: Array<T>;
 	export let fetchMoreResults: () => Promise<T[]>;
 	export let onSuccess: () => Promise<void>;
-	export let noMoreSearchResults: boolean;
+	export let noMoreSearchResults: boolean = false;
 	let loadingElement: HTMLDivElement;
 	let loadingSearchResults = false;
 

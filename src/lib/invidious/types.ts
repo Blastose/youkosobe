@@ -259,7 +259,7 @@ export type GetRelatedChannelsFromChannelId = {
 };
 
 export type GetChannelPlaylistsParams = {
-	continuation: string;
+	continuation?: string;
 	sort_by: 'oldest' | 'newest' | 'last';
 };
 
@@ -268,10 +268,10 @@ export type GetChannelPlaylists = {
 	continuation: string;
 };
 
-export type GetChannelShortsParams = { continuation: string };
+export type GetChannelShortsParams = { continuation?: string };
 export type GetChannelStreamsParams = GetChannelVideosParams;
 export type GetChannelVideosParams = {
-	continuation: string;
+	continuation?: string;
 	sort_by: 'newest' | 'popular' | 'oldest';
 };
 export type GetChannelVideos = {

@@ -12,7 +12,7 @@
 
 <div class="grid">
 	<div
-		class="rounded-lg max-w-4xl grid grid-cols-[min-content_1fr] p-4 gap-2 sm:gap-4 border dark:border-[#696969]"
+		class="rounded-lg max-w-4xl grid grid-cols-[min-content_1fr] p-4 gap-2 sm:gap-4 border dark:border-[var(--dark-outline)]"
 	>
 		<div>
 			{#if authorThumbnail}

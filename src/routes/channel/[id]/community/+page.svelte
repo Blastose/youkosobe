@@ -1,7 +1,11 @@
 <script lang="ts">
 	import CommunityPostCard from '$lib/components/channel/community/CommunityPostCard.svelte';
+	import InfiniteScrolling from '$lib/components/layout/InfiniteScrolling.svelte';
+	import { Invidious } from '$lib/invidious/invidious.js';
 
 	export let data;
+	$: continuation = data.communityPosts.continuation;
+	$: noMoreSearchResults = !Boolean(data.communityPosts.continuation);
 	console.log(data.communityPosts);
 </script>
 
@@ -10,6 +14,21 @@
 		{#each data.communityPosts.comments as communityPost}
 			<CommunityPostCard {communityPost} />
 		{/each}
+
+		<InfiniteScrolling
+			bind:results={data.communityPosts.comments}
+			bind:noMoreSearchResults
+			fetchMoreResults={async () => {
+				const invidious = new Invidious('https://invidious.fdn.fr');
+				const res = await invidious.getChannelCommunityPosts(data.channel.authorId, {
+					continuation
+				});
+				data.communityPosts.continuation = res.continuation;
+				noMoreSearchResults = !Boolean(data.communityPosts.continuation);
+				return res.comments;
+			}}
+			onSuccess={async () => {}}
+		/>
 	{:else}
 		<p class="w-full text-center">This channel hasn't posted yet</p>
 	{/if}

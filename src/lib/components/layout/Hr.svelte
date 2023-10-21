@@ -1,1 +1,1 @@
-<hr class="dark:border-[#696969]" />
+<hr class="dark:border-[var(--dark-outline)]" />

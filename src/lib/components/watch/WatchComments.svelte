@@ -5,12 +5,14 @@
 	import { Invidious } from '$lib/invidious/invidious';
 	import Loading from '../layout/Loading.svelte';
 	import SortBy from './SortBy.svelte';
+	import InfiniteScrolling from '../layout/InfiniteScrolling.svelte';
 
 	export let commentObject: GetCommentsById;
 	export let channelName: string;
 	export let videoId: string;
 	let loadingComments = false;
-
+	$: continuation = commentObject.continuation;
+	$: noMoreSearchResults = !Boolean(commentObject.continuation);
 	console.log(commentObject);
 
 	async function getComments() {
@@ -22,8 +24,24 @@
 		const res = await invidious.getCommentsById(videoId, {
 			sort_by
 		});
+		console.log(res);
 		commentObject.comments = res.comments;
+		continuation = res.continuation;
+		noMoreSearchResults = !Boolean(continuation);
 		loadingComments = false;
+	}
+
+	async function getMoreComments() {
+		const invidious = new Invidious('https://invidious.fdn.fr');
+		let sort_by = $page.url.searchParams.get('sort_by') as GetCommentsByIdParams['sort_by'] | null;
+		if (!sort_by) sort_by = undefined;
+		const res = await invidious.getCommentsById(videoId, {
+			sort_by,
+			continuation
+		});
+		commentObject.continuation = res.continuation;
+		noMoreSearchResults = !Boolean(commentObject.continuation);
+		return res.comments;
 	}
 </script>
 
@@ -41,5 +59,11 @@
 		{#each commentObject.comments as comment}
 			<CommentWrapper {channelName} id={comment.commentId} {comment} type="video" />
 		{/each}
+		<InfiniteScrolling
+			bind:results={commentObject.comments}
+			bind:noMoreSearchResults
+			fetchMoreResults={getMoreComments}
+			onSuccess={async () => {}}
+		/>
 	{/if}
 </div>

@@ -7,11 +7,11 @@
 
 	$: playlistWatchUrl = `/watch?v=${playlist.videos.at(0)?.videoId}&list=${
 		playlist.playlistId
-	}&index=1`;
+	}&index=0`;
 </script>
 
 <div
-	class="text-white rounded-3xl overflow-hidden bg bg-no-repeat bg-cover"
+	class="text-[var(--dark-text)] rounded-3xl overflow-hidden bg bg-no-repeat bg-cover"
 	style="background-image: url({playlist.playlistThumbnail});"
 >
 	<div

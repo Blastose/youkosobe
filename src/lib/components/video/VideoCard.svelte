@@ -15,6 +15,7 @@
 	export let viewCountText: string;
 	export let lengthSeconds: number;
 	export let type: 'video' | 'short' | 'stream';
+	export let premiereTimestamp: number | undefined = undefined;
 </script>
 
 <ClickableDivWrapper href="/watch?v={videoId}">
@@ -36,14 +37,18 @@
 				<a href="/watch?v={videoId}" class="line-clamp-2">{title}</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
 					<Author {author} {authorUrl} {authorVerified} />
-					<span>
-						{viewCountText}
-						{#if type === 'video'}
-							• {publishedText}
-						{:else if type === 'stream'}
-							• Streamed {publishedText}
-						{/if}
-					</span>
+					{#if !premiereTimestamp}
+						<span>
+							{viewCountText}
+							{#if type === 'video'}
+								• {publishedText}
+							{:else if type === 'stream'}
+								• Streamed {publishedText}
+							{/if}
+						</span>
+					{:else}
+						<span>Starts in {premiereTimestamp}</span>
+					{/if}
 				</p>
 			</div>
 		</div>
