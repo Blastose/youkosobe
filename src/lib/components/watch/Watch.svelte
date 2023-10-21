@@ -84,7 +84,7 @@
 					use:initVideo
 					bind:this={videoElement}
 					on:ended={playNextVideoInPlaylist}
-					class="w-full"
+					class="w-full max-h-[calc(80vh_-_var(--header-height))]"
 					src={stream.url}
 					controls
 					muted
