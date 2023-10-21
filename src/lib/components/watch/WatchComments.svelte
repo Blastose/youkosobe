@@ -11,9 +11,8 @@
 	export let channelName: string;
 	export let videoId: string;
 	let loadingComments = false;
-	let continuation = commentObject.continuation;
-	let noMoreSearchResults = !Boolean(continuation);
-
+	$: continuation = commentObject.continuation;
+	$: noMoreSearchResults = !Boolean(commentObject.continuation);
 	console.log(commentObject);
 
 	async function getComments() {
@@ -40,7 +39,8 @@
 			sort_by,
 			continuation
 		});
-		continuation = res.continuation;
+		commentObject.continuation = res.continuation;
+		noMoreSearchResults = !Boolean(commentObject.continuation);
 		return res.comments;
 	}
 </script>
