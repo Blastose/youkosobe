@@ -27,7 +27,7 @@
 		<p class="text-sm dark:text-neutral-400">
 			<a href="/channel/{playlist.authorId}">{playlist.author}</a>
 			-
-			{playlistIndex} / {playlist.videoCount}
+			{Number(playlistIndex) + 1} / {playlist.videoCount}
 		</p>
 	</div>
 
@@ -41,7 +41,7 @@
 					: 'dark:hover:bg-neutral-700  '}
       grid grid-cols-[30px_1fr] pr-4 items-center"
 			>
-				<span class="text-center text-xs dark:text-neutral-400">{video.index}</span>
+				<span class="text-center text-xs dark:text-neutral-400">{video.index + 1}</span>
 				<PlaylistVideoCard
 					videoObject={video}
 					playlistId={playlist.playlistId}
