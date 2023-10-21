@@ -17,7 +17,9 @@
 <ClickableDivWrapper {href} fit={true}>
 	<div
 		class="max-w-5xl grid gap-4
-		{thumbnailSize === 'small' ? 'grid-cols-[100px_1fr]' : 'grid-cols-[160px_1fr]'}"
+		{thumbnailSize === 'small'
+			? 'grid-cols-[100px_1fr]'
+			: 'grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr]'}"
 	>
 		{#if thumbnail}
 			<VideoThumbnail {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
