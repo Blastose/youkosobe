@@ -14,15 +14,16 @@ export const load: PageLoad = async ({ url }) => {
 	}
 
 	const invidious = new Invidious('https://invidious.fdn.fr');
-	const video = await invidious.getVideoById(id);
+	const videoPromise = invidious.getVideoById(id);
 
-	let playlist: GetPlaylistsByPlid | undefined = undefined;
+	let playlistPromise: Promise<GetPlaylistsByPlid> | undefined = undefined;
 	if (playlistId && playlistIndex) {
-		playlist = await invidious.getPlaylistsByPlid(playlistId, {
+		playlistPromise = invidious.getPlaylistsByPlid(playlistId, {
 			continuation: id,
 			index: Number(playlistIndex)
 		});
 	}
+	const [video, playlist] = await Promise.all([videoPromise, playlistPromise]);
 
 	return { video, id, initialTimestamp, playlist };
 };
