@@ -12,6 +12,7 @@
 	export let videoId: string;
 	let loadingComments = false;
 	let continuation = commentObject.continuation;
+	let noMoreSearchResults = !Boolean(continuation);
 
 	console.log(commentObject);
 
@@ -27,6 +28,7 @@
 		console.log(res);
 		commentObject.comments = res.comments;
 		continuation = res.continuation;
+		noMoreSearchResults = !Boolean(continuation);
 		loadingComments = false;
 	}
 
@@ -59,6 +61,7 @@
 		{/each}
 		<InfiniteScrolling
 			bind:results={commentObject.comments}
+			bind:noMoreSearchResults
 			fetchMoreResults={getMoreComments}
 			onSuccess={async () => {}}
 		/>

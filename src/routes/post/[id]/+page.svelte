@@ -23,6 +23,7 @@
 		});
 		comments = fetchedComments;
 		continuation = fetchedComments.continuation;
+		noMoreSearchResults = !Boolean(continuation);
 		console.log(fetchedComments);
 	});
 </script>
