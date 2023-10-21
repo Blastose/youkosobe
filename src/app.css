@@ -5,6 +5,7 @@
 @layer base {
 	:root {
 		--light-500: '#ffffff';
+		/* TODO change to #232323 (looks better imo) (also need to change other colors) */
 		--dark-500: #0f0f0f;
 		--dark-text: #f5f4f8;
 		--dark-outline: #37373a;
