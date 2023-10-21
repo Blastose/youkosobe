@@ -259,7 +259,7 @@ export type GetRelatedChannelsFromChannelId = {
 };
 
 export type GetChannelPlaylistsParams = {
-	continuation: string;
+	continuation?: string;
 	sort_by: 'oldest' | 'newest' | 'last';
 };
 

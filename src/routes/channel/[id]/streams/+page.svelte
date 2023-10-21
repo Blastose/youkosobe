@@ -13,7 +13,7 @@
 
 <svelte:head><title>{buildPageTitle(data.channel.author)}</title></svelte:head>
 
-<div>
+<div class="flex flex-col gap-4">
 	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
 		{#each data.streams.videos as video}
 			{@const thumbnail =

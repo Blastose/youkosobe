@@ -14,7 +14,7 @@
 <svelte:head><title>{buildPageTitle(data.channel.author)}</title></svelte:head>
 
 <div class="flex flex-col gap-4">
-	<SortButtons basePath="/channel/{data.channel.authorId}/videos" />
+	<SortButtons type="video" basePath="/channel/{data.channel.authorId}/videos" />
 	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
 		{#each data.videos.videos as video, index (`${index}${video.videoId}`)}
 			{@const thumbnail =

@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 
 	export let basePath: string;
+	export let type: 'video' | 'playlist';
 
 	function buildHref(sortValue?: string) {
 		if (!sortValue) return basePath;
@@ -16,7 +17,20 @@
 </script>
 
 <div class="flex gap-2 flex-wrap">
-	<SortButton name="Latest" href={buildHref()} active={isActive($page.url, null)} />
-	<SortButton name="Popular" href={buildHref('popular')} active={isActive($page.url, 'popular')} />
-	<SortButton name="Oldest" href={buildHref('oldest')} active={isActive($page.url, 'oldest')} />
+	{#if type === 'video'}
+		<SortButton name="Latest" href={buildHref()} active={isActive($page.url, null)} />
+		<SortButton
+			name="Popular"
+			href={buildHref('popular')}
+			active={isActive($page.url, 'popular')}
+		/>
+		<SortButton name="Oldest" href={buildHref('oldest')} active={isActive($page.url, 'oldest')} />
+	{:else if type === 'playlist'}
+		<SortButton name="Date added (newest)" href={buildHref()} active={isActive($page.url, null)} />
+		<SortButton
+			name="Last video added"
+			href={buildHref('last')}
+			active={isActive($page.url, 'last')}
+		/>
+	{/if}
 </div>
