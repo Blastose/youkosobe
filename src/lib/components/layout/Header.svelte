@@ -9,13 +9,14 @@
 		<div class="flex items-center gap-2 sm:gap-4">
 			<Drawer />
 
-			<a class="text-lg font-bold" href="/">Youkosobe</a>
+			<a class="whitespace-nowrap text-lg font-bold" href="/">Youkosobe</a>
 		</div>
 
 		<SearchInput />
 
 		<div>
 			<button
+				class="whitespace-nowrap"
 				on:click={() => {
 					themeStore.toggle();
 				}}>Theme</button
