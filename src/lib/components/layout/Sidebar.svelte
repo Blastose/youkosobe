@@ -2,7 +2,6 @@
 	import { IconHome, IconTrendingUp } from '@tabler/icons-svelte';
 
 	import SidebarItem from './SidebarItem.svelte';
-	import Hr from './Hr.svelte';
 	import Icon from '../icon/Icon.svelte';
 </script>
 
@@ -10,20 +9,12 @@
 	<SidebarItem href={'/'} linkText="Home">
 		<IconHome />
 	</SidebarItem>
-	<SidebarItem
-		href={'/playlist?list=PLUhYAiEwD-whqQ2Ak4wBJxO6WnS15l8AN'}
-		linkText="The Black Paradeeeeeeeeeeeeeeeee"
-	>
+	<SidebarItem href={'/feed/trending'} linkText="Trending">
+		<IconTrendingUp />
+	</SidebarItem>
+	<SidebarItem href={'/playlist'} linkText="Playlists soon!">
 		<Icon name="playlistPlay" height="24" width="24" />
 	</SidebarItem>
-	{#each { length: 25 } as a, index}
-		<SidebarItem href={'/feed/trending'} linkText="Trending">
-			<IconTrendingUp />
-		</SidebarItem>
-		{#if index % 10 === 0}
-			<Hr />
-		{/if}
-	{/each}
 </div>
 
 <style>
