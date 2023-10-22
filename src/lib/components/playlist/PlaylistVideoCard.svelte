@@ -22,7 +22,7 @@
 			: 'grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr]'}"
 	>
 		{#if thumbnail}
-			<VideoThumbnail {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
+			<VideoThumbnail {href} {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
 		{/if}
 
 		<div class="flex flex-col gap-2">

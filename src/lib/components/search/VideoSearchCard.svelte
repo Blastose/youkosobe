@@ -9,17 +9,18 @@
 	$: thumbnail =
 		videoObject.videoThumbnails.find((v) => v.quality === 'medium') ??
 		videoObject.videoThumbnails.at(0);
+	$: href = `/watch?v=${videoObject.videoId}`;
 </script>
 
-<ClickableDivWrapper href="/watch?v={videoObject.videoId}" fit={true}>
+<ClickableDivWrapper {href} fit={true}>
 	<div class="max-w-5xl grid grid-cols-[128px_1fr] sm:grid-cols-[246px_1fr] gap-4">
 		{#if thumbnail}
-			<VideoThumbnail {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
+			<VideoThumbnail {href} {thumbnail} lengthSeconds={videoObject.lengthSeconds} />
 		{/if}
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<a href="/watch?v={videoObject.videoId}" class="text-lg font-semibold">
+				<a {href} class="text-lg font-semibold">
 					{videoObject.title}
 				</a>
 				<p class="text-sm dark:text-neutral-400">

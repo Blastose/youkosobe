@@ -13,7 +13,12 @@
 
 <ClickableDivWrapper href={playlistUrl} fit={true}>
 	<div class="grid grid-cols-[128px_1fr] sm:grid-cols-[246px_1fr] gap-4">
-		<PlaylistThumbnail {playlistThumbnail} type="playlist" videoCount={playlistObject.videoCount} />
+		<PlaylistThumbnail
+			href={playlistUrl}
+			{playlistThumbnail}
+			type="playlist"
+			videoCount={playlistObject.videoCount}
+		/>
 
 		<div class="flex flex-col gap-2">
 			<div>
