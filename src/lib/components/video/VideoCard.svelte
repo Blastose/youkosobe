@@ -16,11 +16,13 @@
 	export let lengthSeconds: number;
 	export let type: 'video' | 'short' | 'stream';
 	export let premiereTimestamp: number | undefined = undefined;
+
+	$: href = `/watch?v=${videoId}`;
 </script>
 
-<ClickableDivWrapper href="/watch?v={videoId}">
+<ClickableDivWrapper {href}>
 	<div class="flex flex-col gap-1">
-		<VideoThumbnail thumbnail={videoThumbnail} {lengthSeconds} />
+		<VideoThumbnail {href} thumbnail={videoThumbnail} {lengthSeconds} />
 
 		<div class="flex gap-1">
 			{#if authorThumbnail}
@@ -34,7 +36,7 @@
 				/>
 			{/if}
 			<div class="flex flex-col">
-				<a href="/watch?v={videoId}" class="line-clamp-2">{title}</a>
+				<a {href} {title} class="line-clamp-2">{title}</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
 					<Author {author} {authorUrl} {authorVerified} />
 					{#if !premiereTimestamp}

@@ -9,21 +9,23 @@
 		recommendedVideo.videoThumbnails.find((v) => v.quality === 'medium') ??
 		recommendedVideo.videoThumbnails.at(0);
 	$: isLivestream = recommendedVideo.viewCount === 0 && recommendedVideo.lengthSeconds === 0;
+	$: href = `/watch?v=${recommendedVideo.videoId}`;
 </script>
 
-<ClickableDivWrapper href="/watch?v={recommendedVideo.videoId}" fit={true}>
+<ClickableDivWrapper {href} fit={true}>
 	<div class="recommended-video-card max-w-5xl">
 		{#if thumbnail}
-			<VideoThumbnail {thumbnail} lengthSeconds={recommendedVideo.lengthSeconds} />
+			<VideoThumbnail {href} {thumbnail} lengthSeconds={recommendedVideo.lengthSeconds} />
 		{/if}
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<a href="/watch?v={recommendedVideo.videoId}" class="line-clamp-2 font-semibold">
+				<a {href} title={recommendedVideo.title} class="line-clamp-2 font-semibold">
 					{recommendedVideo.title}
 				</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
-					<span class="line-clamp-1">{recommendedVideo.author}</span>
+					<span title={recommendedVideo.author} class="line-clamp-1">{recommendedVideo.author}</span
+					>
 					<!-- Livestream -->
 					{#if isLivestream}
 						<span>{recommendedVideo.viewCountText} watching</span>
