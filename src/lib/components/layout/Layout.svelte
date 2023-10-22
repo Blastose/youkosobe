@@ -1,7 +1,23 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { sidebarStateStore } from '$lib/stores/sidebarStateStore';
+	import { windowSizeStore } from '$lib/stores/windowSizeStore';
 	import Header from './Header.svelte';
 	import Sidebar from './Sidebar.svelte';
+
+	$: {
+		$page;
+		$windowSizeStore;
+		if ($page.url.pathname.startsWith('/watch')) {
+			sidebarStateStore.set('closed');
+		} else {
+			if ($windowSizeStore === 'large') {
+				sidebarStateStore.set('open');
+			} else {
+				sidebarStateStore.set('closed');
+			}
+		}
+	}
 </script>
 
 <div class="layout-container">
@@ -12,8 +28,8 @@
 	<div class="filler" />
 
 	<div
-		class="sidebar layout-bg invisible -ml-64 xl:visible sidebar-animation
-	 {$page.url.pathname.startsWith('/watch') ? '' : 'xl:ml-0'}"
+		class="sidebar sidebar-animation layout-bg invisible -ml-64
+		{$sidebarStateStore === 'open' ? 'show-sidebar' : ''}"
 	>
 		<Sidebar />
 	</div>
@@ -26,6 +42,11 @@
 <style>
 	.layout-bg {
 		background-color: var(--light-500);
+	}
+
+	.show-sidebar {
+		visibility: visible;
+		margin-left: 0rem;
 	}
 
 	:global(.dark) .layout-bg {

@@ -7,10 +7,34 @@
 	import NProgress from 'nprogress';
 	import '../nprogress.css';
 	import { buildPageTitle } from '$lib/components/layout/utils';
+	import { windowSizeStore } from '$lib/stores/windowSizeStore';
 
 	onMount(() => {
 		themeStore; // import themeStore to initialize it
 	});
+
+	const monitorScreenSize = (node: Window) => {
+		const windowQuery = node.matchMedia('(min-width: 1024px)');
+		const match = (e: MediaQueryListEvent) => {
+			if (e.matches) {
+				windowSizeStore.set('large');
+			} else {
+				windowSizeStore.set('small');
+			}
+		};
+
+		if (!windowQuery.matches) {
+			windowSizeStore.set('small');
+		}
+
+		windowQuery.addEventListener('change', match);
+
+		return {
+			destroy() {
+				windowQuery.removeEventListener('change', match);
+			}
+		};
+	};
 
 	let nprogressTimeoutId: ReturnType<typeof setTimeout>;
 
@@ -34,6 +58,8 @@
 		}
 	}
 </script>
+
+<svelte:window use:monitorScreenSize />
 
 <svelte:head>
 	<script>

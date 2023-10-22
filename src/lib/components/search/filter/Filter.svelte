@@ -11,6 +11,7 @@
 		sortByArrayRadio,
 		typeArrayRadio
 	} from './types';
+	import CloseButton from '$lib/components/melt/CloseButton.svelte';
 
 	const {
 		elements: { overlay, content, title, close, portalled, trigger },
@@ -100,17 +101,7 @@
 				</form>
 			</div>
 
-			<button
-				use:melt={$close}
-				aria-label="Close"
-				class="absolute right-[10px] top-[10px] inline-flex p-1
-            appearance-none items-center justify-center rounded-full
-            dark:text-neutral-200
-            dark:hover:bg-neutral-700 focus:shadow-neutral-400 focus:outline-none focus:ring-2
-            focus:ring-neutral-400"
-			>
-				<IconX />
-			</button>
+			<CloseButton {close} />
 		</div>
 	{/if}
 </div>
