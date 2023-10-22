@@ -36,7 +36,7 @@
 				/>
 			{/if}
 			<div class="flex flex-col">
-				<a {href} class="line-clamp-2">{title}</a>
+				<a {href} {title} class="line-clamp-2">{title}</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
 					<Author {author} {authorUrl} {authorVerified} />
 					{#if !premiereTimestamp}

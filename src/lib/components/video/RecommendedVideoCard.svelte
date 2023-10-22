@@ -20,11 +20,12 @@
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<a {href} class="line-clamp-2 font-semibold">
+				<a {href} title={recommendedVideo.title} class="line-clamp-2 font-semibold">
 					{recommendedVideo.title}
 				</a>
 				<p class="flex flex-col text-sm dark:text-neutral-400">
-					<span class="line-clamp-1">{recommendedVideo.author}</span>
+					<span title={recommendedVideo.author} class="line-clamp-1">{recommendedVideo.author}</span
+					>
 					<!-- Livestream -->
 					{#if isLivestream}
 						<span>{recommendedVideo.viewCountText} watching</span>

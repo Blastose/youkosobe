@@ -29,6 +29,7 @@
 			<div>
 				<a
 					{href}
+					title={videoObject.title}
 					class={thumbnailSize === 'small' ? 'font-semibold line-clamp-2' : 'text-lg font-semibold'}
 				>
 					{videoObject.title}

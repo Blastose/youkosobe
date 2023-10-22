@@ -22,6 +22,7 @@
 
 		<div class="flex flex-col gap-2">
 			<a
+				title={playlistObject.title}
 				href={firstVideoOfPlaylistId
 					? `/watch?v=${firstVideoOfPlaylistId}&list=${playlistObject.playlistId}`
 					: playlistUrl}
