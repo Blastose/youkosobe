@@ -2,7 +2,7 @@
 	import type { GetCommentsById, GetCommentsByIdParams } from '$lib/invidious/types';
 	import CommentWrapper from '../comment/CommentWrapper.svelte';
 	import { page } from '$app/stores';
-	import { Invidious } from '$lib/invidious/invidious';
+	import { createInvidious } from '$lib/invidious/utils';
 	import Loading from '../layout/Loading.svelte';
 	import SortBy from './SortBy.svelte';
 	import InfiniteScrolling from '../layout/InfiniteScrolling.svelte';
@@ -20,7 +20,7 @@
 		loadingComments = true;
 		let sort_by = $page.url.searchParams.get('sort_by') as GetCommentsByIdParams['sort_by'] | null;
 		if (!sort_by) sort_by = undefined;
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 		const res = await invidious.getCommentsById(videoId, {
 			sort_by
 		});
@@ -32,7 +32,7 @@
 	}
 
 	async function getMoreComments() {
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 		let sort_by = $page.url.searchParams.get('sort_by') as GetCommentsByIdParams['sort_by'] | null;
 		if (!sort_by) sort_by = undefined;
 		const res = await invidious.getCommentsById(videoId, {

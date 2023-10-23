@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CommunityPostCard from '$lib/components/channel/community/CommunityPostCard.svelte';
 	import InfiniteScrolling from '$lib/components/layout/InfiniteScrolling.svelte';
-	import { Invidious } from '$lib/invidious/invidious.js';
+	import { createInvidious } from '$lib/invidious/utils';
 
 	export let data;
 	$: continuation = data.communityPosts.continuation;
@@ -19,7 +19,7 @@
 			bind:results={data.communityPosts.comments}
 			bind:noMoreSearchResults
 			fetchMoreResults={async () => {
-				const invidious = new Invidious('https://invidious.fdn.fr');
+				const invidious = await createInvidious();
 				const res = await invidious.getChannelCommunityPosts(data.channel.authorId, {
 					continuation
 				});

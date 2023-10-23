@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Invidious } from '$lib/invidious/invidious';
+	import { createInvidious } from '$lib/invidious/utils';
 	import type { GetPlaylistsByPlid } from '$lib/invidious/types';
 	import InfiniteScrolling from '../layout/InfiniteScrolling.svelte';
 	import PlaylistVideoCard from './PlaylistVideoCard.svelte';
@@ -21,7 +21,7 @@
 		bind:results={playlist.videos}
 		bind:noMoreSearchResults
 		fetchMoreResults={async () => {
-			const invidious = new Invidious('https://invidious.fdn.fr');
+			const invidious = await createInvidious();
 			const res = await invidious.getPlaylistsByPlid(playlist.playlistId, {
 				page: pageParam
 			});

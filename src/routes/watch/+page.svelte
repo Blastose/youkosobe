@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { buildPageTitle } from '$lib/components/layout/utils.js';
 	import Watch from '$lib/components/watch/Watch.svelte';
-	import { Invidious } from '$lib/invidious/invidious.js';
+	import { createInvidious } from '$lib/invidious/utils';
 	import type { GetCommentsById, GetCommentsByIdParams } from '$lib/invidious/types.js';
 
 	export let data;
@@ -18,7 +18,7 @@
 				| GetCommentsByIdParams['sort_by']
 				| null;
 			if (!sort_by) sort_by = undefined;
-			const invidious = new Invidious('https://invidious.fdn.fr');
+			const invidious = await createInvidious();
 			try {
 				const res = await invidious.getCommentsById(data.id, {
 					sort_by

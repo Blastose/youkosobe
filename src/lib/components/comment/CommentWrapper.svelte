@@ -2,8 +2,8 @@
 	import type { Comment } from '$lib/invidious/types';
 	import CommentW from './Comment.svelte';
 	import { IconChevronDown, IconChevronUp, IconCornerDownRight } from '@tabler/icons-svelte';
-	import { Invidious } from '$lib/invidious/invidious';
 	import Loading from '../layout/Loading.svelte';
+	import { createInvidious } from '$lib/invidious/utils';
 
 	export let id: string;
 	export let comment: Comment;
@@ -19,7 +19,7 @@
 	async function getReplies() {
 		if (!continuation) return;
 		gettingReplies = true;
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 
 		let fetchedReplies;
 		if (type === 'community') {

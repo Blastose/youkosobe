@@ -1,4 +1,4 @@
-import { Invidious } from '$lib/invidious/invidious';
+import { createInvidious } from '$lib/invidious/utils';
 import type { GetSearchParams } from '$lib/invidious/types';
 
 export function castSearchParamsToType<T>(searchParam: string | string[] | null, valueIfNull: T) {
@@ -32,7 +32,7 @@ export async function getSearchFromUrl(url: URL, page: number) {
 	console.log(duration);
 	console.log(features);
 	console.log(sort);
-	const invidious = new Invidious('https://invidious.fdn.fr');
+	const invidious = await createInvidious();
 	return await invidious.getSearch({
 		q: search_query,
 		page,

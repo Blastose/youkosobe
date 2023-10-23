@@ -2,7 +2,7 @@
 	import InfiniteScrolling from '$lib/components/layout/InfiniteScrolling.svelte';
 	import { buildPageTitle } from '$lib/components/layout/utils.js';
 	import VideoCard from '$lib/components/video/VideoCard.svelte';
-	import { Invidious } from '$lib/invidious/invidious.js';
+	import { createInvidious } from '$lib/invidious/utils';
 
 	export let data;
 	$: continuation = data.shorts.continuation;
@@ -35,7 +35,7 @@
 		bind:results={data.shorts.videos}
 		bind:noMoreSearchResults
 		fetchMoreResults={async () => {
-			const invidious = new Invidious('https://invidious.fdn.fr');
+			const invidious = await createInvidious();
 			const res = await invidious.getChannelShorts(data.channel.authorId, {
 				continuation
 			});

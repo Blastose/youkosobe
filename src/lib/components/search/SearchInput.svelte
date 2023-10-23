@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Invidious } from '$lib/invidious/invidious';
+	import { createInvidious } from '$lib/invidious/utils';
 	import { mousedownOutside } from '$lib/components/layout/utils';
 	import debounce from 'just-debounce-it';
 	import { IconSearch, IconX } from '@tabler/icons-svelte';
@@ -83,7 +83,7 @@
 	// search input so we can iterate over it when pressing the up/down keys
 	async function getSearchSuggestions(q: string) {
 		loadingSearchSuggestions = true;
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 		try {
 			const result = await invidious.getSearchSuggestions({ q });
 			searchSuggestions = [inputText];
