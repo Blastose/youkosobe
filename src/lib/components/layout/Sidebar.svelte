@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconHome, IconTrendingUp } from '@tabler/icons-svelte';
+	import { IconHome, IconSettings, IconTrendingUp } from '@tabler/icons-svelte';
 
 	import SidebarItem from './SidebarItem.svelte';
 	import Icon from '../icon/Icon.svelte';
@@ -14,6 +14,9 @@
 	</SidebarItem>
 	<SidebarItem href={'/playlist'} linkText="Playlists soon!">
 		<Icon name="playlistPlay" height="24" width="24" />
+	</SidebarItem>
+	<SidebarItem href={'/settings'} linkText="Settings">
+		<IconSettings />
 	</SidebarItem>
 </div>
 

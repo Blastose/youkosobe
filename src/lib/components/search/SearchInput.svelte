@@ -18,6 +18,9 @@
 	function jumpToSearchInput(_node: HTMLFormElement) {
 		const jumpTosearch = (e: KeyboardEvent) => {
 			if (e.key === '/') {
+				if (document.activeElement?.tagName === 'INPUT') {
+					return;
+				}
 				if (document.activeElement !== inputElement) {
 					e.preventDefault();
 					inputElement.focus();
