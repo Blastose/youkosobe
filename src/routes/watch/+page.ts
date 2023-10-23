@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { Invidious } from '$lib/invidious/invidious';
+import { createInvidious } from '$lib/invidious/utils';
 import { redirect } from '@sveltejs/kit';
 import type { GetPlaylistsByPlid } from '$lib/invidious/types';
 
@@ -13,7 +13,7 @@ export const load: PageLoad = async ({ url }) => {
 		throw redirect(302, '/');
 	}
 
-	const invidious = new Invidious('https://invidious.fdn.fr');
+	const invidious = await createInvidious();
 	const videoPromise = invidious.getVideoById(id);
 
 	let playlistPromise: Promise<GetPlaylistsByPlid> | undefined = undefined;

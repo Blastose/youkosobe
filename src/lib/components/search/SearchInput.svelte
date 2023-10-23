@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Invidious } from '$lib/invidious/invidious';
+	import { createInvidious } from '$lib/invidious/utils';
 	import { mousedownOutside } from '$lib/components/layout/utils';
 	import debounce from 'just-debounce-it';
 	import { IconSearch, IconX } from '@tabler/icons-svelte';
@@ -18,6 +18,9 @@
 	function jumpToSearchInput(_node: HTMLFormElement) {
 		const jumpTosearch = (e: KeyboardEvent) => {
 			if (e.key === '/') {
+				if (document.activeElement?.tagName === 'INPUT') {
+					return;
+				}
 				if (document.activeElement !== inputElement) {
 					e.preventDefault();
 					inputElement.focus();
@@ -80,7 +83,7 @@
 	// search input so we can iterate over it when pressing the up/down keys
 	async function getSearchSuggestions(q: string) {
 		loadingSearchSuggestions = true;
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 		try {
 			const result = await invidious.getSearchSuggestions({ q });
 			searchSuggestions = [inputText];

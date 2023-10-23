@@ -3,7 +3,7 @@
 	import InfiniteScrolling from '$lib/components/layout/InfiniteScrolling.svelte';
 	import { buildPageTitle } from '$lib/components/layout/utils.js';
 	import PlaylistCard from '$lib/components/video/PlaylistCard.svelte';
-	import { Invidious } from '$lib/invidious/invidious.js';
+	import { createInvidious } from '$lib/invidious/utils';
 
 	export let data;
 	$: continuation = data.playlists.continuation;
@@ -28,7 +28,7 @@
 			bind:results={data.playlists.playlists}
 			bind:noMoreSearchResults
 			fetchMoreResults={async () => {
-				const invidious = new Invidious('https://invidious.fdn.fr');
+				const invidious = await createInvidious();
 				const res = await invidious.getChannelPlaylists(data.channel.authorId, {
 					sort_by: data.sort_by ?? 'newest',
 					continuation

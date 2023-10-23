@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CommunityPostCard from '$lib/components/channel/community/CommunityPostCard.svelte';
 	import { buildPageTitle } from '$lib/components/layout/utils.js';
-	import { Invidious } from '$lib/invidious/invidious.js';
+	import { createInvidious } from '$lib/invidious/utils';
 	import type { GetChannelCommunityPostComments } from '$lib/invidious/types.js';
 	import { onMount } from 'svelte';
 	import CommentWrapper from '$lib/components/comment/CommentWrapper.svelte';
@@ -17,7 +17,7 @@
 
 	let comments: GetChannelCommunityPostComments | undefined = undefined;
 	onMount(async () => {
-		const invidious = new Invidious('https://invidious.fdn.fr');
+		const invidious = await createInvidious();
 		const fetchedComments = await invidious.getChannelCommunityPostComments(data.postId, {
 			ucid: channelId
 		});
@@ -52,7 +52,7 @@
 				bind:results={comments.comments}
 				bind:noMoreSearchResults
 				fetchMoreResults={async () => {
-					const invidious = new Invidious('https://invidious.fdn.fr');
+					const invidious = await createInvidious();
 					const fetchedComments = await invidious.getChannelCommunityPostComments(data.postId, {
 						ucid: channelId,
 						continuation
