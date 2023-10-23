@@ -1,38 +1,22 @@
-# create-svelte
+# ![Youkosobe logo](./static/favicon-32x32.png) Youkosobe
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Youkosobe is an alternate [Invidious](https://github.com/iv-org/invidious) front-end built with Invidious's api.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Switch between Invidious instances
+- UI similar to YouTube
+- No ads
+- No tracking
+- Light and dark theme
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Contributing
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+This project requires the use of [pnpm](https://pnpm.io/).
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies with `pnpm install` and start a development server with `pnpm run dev`:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm install
+pnpm run dev
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
