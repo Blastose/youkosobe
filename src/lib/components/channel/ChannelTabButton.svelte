@@ -5,10 +5,10 @@
 </script>
 
 <div
-	class="font-semibold whitespace-nowrap uppercase {active ? '' : 'dark:text-neutral-400'}"
+	class="font-semibold whitespace-nowrap capitalize {active ? '' : 'dark:text-neutral-400'}"
 	class:active
 >
-	<a class="px-8 py-1" {href}>
+	<a class="px-4 py-2" {href}>
 		{tabName}
 	</a>
 </div>

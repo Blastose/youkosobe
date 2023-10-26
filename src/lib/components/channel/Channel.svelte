@@ -11,12 +11,9 @@
 	$: authorThumbnail = channel.authorThumbnails.at(-1) ?? channel.authorThumbnails[0];
 </script>
 
-<div class="flex flex-col gap-4 sm:gap-6">
+<div class="flex flex-col gap-4">
 	{#if authorBanner}
-		<div
-			class="banner h-[128px] sm:h-[256px] bg-no-repeat bg-cover"
-			style:background-image={`url("${authorBanner.url}")`}
-		/>
+		<img src={authorBanner.url} width="2560" height="1440" alt="" class="rounded-xl" />
 	{/if}
 
 	<div class="flex gap-4 sm:gap-6">
@@ -31,7 +28,7 @@
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<p class="flex font-semibold items-center text-lg gap-2">
+				<p class="flex font-semibold items-center text-lg sm:text-4xl gap-2">
 					{channel.author}
 					{#if channel.authorVerified}
 						<IconCircleCheckFilled size={16} />
@@ -61,11 +58,3 @@
 		<Hr />
 	</div>
 </div>
-
-<style>
-	.banner {
-		width: 100vw;
-		margin-left: calc(-50vw + 50%);
-		background-position: 50% 10%;
-	}
-</style>

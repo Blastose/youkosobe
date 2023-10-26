@@ -21,7 +21,7 @@
 </script>
 
 <div class="grid">
-	<div class="flex relative custom-scroll overflow-x-auto gap-2 sm:gap-8 h-12 items-center">
+	<div class="flex relative custom-scroll overflow-x-auto gap-2 h-12 items-center">
 		{#each allChannelTabs as tab}
 			{#if channelTabs.includes(tab.hrefFragment)}
 				{@const href =
@@ -33,12 +33,12 @@
 				/>
 			{/if}
 		{/each}
-		<div class="relative bottom-1">
+		<div class="relative">
 			<form method="get" action="{channelUrl}/search">
 				<label class="flex gap-2 items-center">
 					<IconSearch class="text-[#bbb8c3]" />
 					<input
-						class="search-input bg-transparent px-4 py-1 border-b border-neutral-500 focus:outline-none focus:border-[var(--dark-text)]"
+						class="search-input bg-transparent px-2 py-2 border-b border-neutral-500 focus:outline-none focus:border-[var(--dark-text)]"
 						placeholder="Search"
 						name="query"
 						type="text"
