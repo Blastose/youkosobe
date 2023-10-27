@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { GetCommentsById, GetPlaylistsByPlid, GetVideoById } from '$lib/invidious/types';
-	import Loading from '../layout/Loading.svelte';
 	import PlaylistWatchContainer from '../playlist/PlaylistWatchContainer.svelte';
 	import RecommendedVideoCard from '../video/RecommendedVideoCard.svelte';
 	import WatchAuthorActions from './WatchAuthorActions.svelte';
-	import WatchComments from './WatchComments.svelte';
 	import WatchDescription from './WatchDescription.svelte';
 	import { page } from '$app/stores';
+	import WatchCommentsPromise from './WatchCommentsPromise.svelte';
 
 	export let video: GetVideoById;
-	export let commentObject: GetCommentsById | 'commentsDisabled' | undefined;
+	export let commentObject: Promise<GetCommentsById>;
 	export let initialTimestamp: number;
 	export let playlist: GetPlaylistsByPlid | undefined;
 
@@ -115,13 +114,7 @@
 
 		{#if video.type !== 'livestream'}
 			<div>
-				{#if commentObject && typeof commentObject !== 'string'}
-					<WatchComments {commentObject} channelName={video.author} videoId={video.videoId} />
-				{:else if commentObject === 'commentsDisabled'}
-					<p class="text-center">Comments are turned off</p>
-				{:else}
-					<Loading />
-				{/if}
+				<WatchCommentsPromise {commentObject} channelName={video.author} videoId={video.videoId} />
 			</div>
 		{/if}
 	</div>

@@ -1,7 +1,7 @@
 import type { PageLoad } from './$types';
 import { createInvidious } from '$lib/invidious/utils';
 import { redirect } from '@sveltejs/kit';
-import type { GetPlaylistsByPlid } from '$lib/invidious/types';
+import type { GetCommentsByIdParams, GetPlaylistsByPlid } from '$lib/invidious/types';
 
 export const load: PageLoad = async ({ url }) => {
 	const id = url.searchParams.get('v');
@@ -25,5 +25,12 @@ export const load: PageLoad = async ({ url }) => {
 	}
 	const [video, playlist] = await Promise.all([videoPromise, playlistPromise]);
 
-	return { video, id, initialTimestamp, playlist };
+	let sort_by = url.searchParams.get('sort_by') as GetCommentsByIdParams['sort_by'] | null;
+	if (!sort_by) sort_by = undefined;
+
+	const commentObject = invidious.getCommentsById(id, {
+		sort_by
+	});
+
+	return { video, id, initialTimestamp, playlist, streamed: { commentObject } };
 };
