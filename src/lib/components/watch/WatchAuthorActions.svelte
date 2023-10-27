@@ -9,9 +9,12 @@
 	import AuthorThumbnail from '../channel/community/AuthorThumbnail.svelte';
 	import WatchButton from './WatchButton.svelte';
 	import { numberFormatter } from '../video/utils';
+	import { page } from '$app/stores';
 
 	export let video: GetVideoById;
 	$: authorThumbnail = video.authorThumbnails.at(-1);
+
+	let buttonText = 'Copy link';
 </script>
 
 <div class="watch-author-actions-container">
@@ -36,15 +39,26 @@
 	</div>
 
 	<div class="actions">
-		<WatchButton buttonText={numberFormatter.format(video.likeCount)}>
+		<WatchButton type="button" buttonText={numberFormatter.format(video.likeCount)}>
 			<IconThumbUp />
 		</WatchButton>
 
-		<WatchButton buttonText="Share">
+		<WatchButton
+			type="button"
+			{buttonText}
+			handleClick={() => {
+				buttonText = 'Copied link!';
+				navigator.clipboard.writeText($page.url.toString());
+			}}
+		>
 			<IconShare3 />
 		</WatchButton>
 
-		<WatchButton buttonText="Youtube">
+		<WatchButton
+			type="a"
+			href="https://www.youtube.com{$page.url.pathname + $page.url.search}"
+			buttonText="Youtube"
+		>
 			<IconBrandYoutube />
 		</WatchButton>
 	</div>
