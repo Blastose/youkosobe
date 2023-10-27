@@ -3,13 +3,17 @@
 
 	export let href: string;
 	export let fit: boolean = false;
+
+	function handleOnClick(e: MouseEvent) {
+		if (e.ctrlKey) return;
+		const target = e.target as HTMLElement | null;
+		if (target?.closest('a')) return;
+		goto(href);
+	}
 </script>
 
 <div
-	on:click={(e) => {
-		if (e.ctrlKey) return;
-		goto(href);
-	}}
+	on:click={handleOnClick}
 	on:keydown={(e) => {
 		if (e.key !== 'Enter' || e.currentTarget !== e.target) return;
 
