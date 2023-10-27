@@ -8,6 +8,13 @@
 	export let comment: Comment;
 	export let channelName: string;
 	$: authorThumbnail = comment.authorThumbnails.at(-1);
+
+	function fixCommentEmojiImages(commentHTML: string) {
+		return commentHTML.replaceAll(
+			`src="/ggpht/`,
+			'style="display:inline; margin: 0 2px; height: 16px; width: 16px;" src="https://lh3.googleusercontent.com/'
+		);
+	}
 </script>
 
 <div class="grid max-w-4xl grid-cols-[min-content_1fr] gap-2 sm:gap-4">
@@ -42,7 +49,7 @@
 
 			<ReadMoreWrapper>
 				<div class="youtube-html">
-					{@html comment.contentHtml}
+					{@html fixCommentEmojiImages(comment.contentHtml)}
 				</div>
 			</ReadMoreWrapper>
 		</div>
