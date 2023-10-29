@@ -13,7 +13,7 @@
 
 <div class="flex flex-col gap-4">
 	{#if authorBanner}
-		<img src={authorBanner.url} width="2560" height="1440" alt="" class="rounded-xl" />
+		<img src={authorBanner.url} alt="" class="rounded-xl" />
 	{/if}
 
 	<div class="flex gap-4 sm:gap-6">
